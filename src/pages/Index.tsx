@@ -27,7 +27,7 @@ const Index = () => {
     try {
       await navigator.clipboard.writeText(cleanedText);
       setCopiedRecently(true);
-      toast.success('Text erfolgreich kopiert');
+      toast.success('Bereinigter Text erfolgreich kopiert');
       setTimeout(() => setCopiedRecently(false), 2000);
     } catch (err) {
       toast.error('Fehler beim Kopieren');
@@ -64,7 +64,7 @@ const Index = () => {
       {/* Grid pattern overlay */}
       <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:50px_50px] pointer-events-none"></div>
 
-      <div className="container mx-auto px-4 py-8 max-w-6xl relative z-10">
+      <div className="container mx-auto px-4 py-8 max-w-4xl relative z-10">
         <AppHeader 
           stats={stats} 
           onInfoClick={() => setShowInfoDialog(true)} 
@@ -75,7 +75,6 @@ const Index = () => {
         <div className="space-y-8">
           <TextInputOutput 
             inputText={inputText}
-            cleanedText={cleanedText}
             onInputChange={setInputText}
           />
 

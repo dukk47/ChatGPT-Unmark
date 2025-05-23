@@ -1,4 +1,3 @@
-
 import React, { useState, useCallback, useMemo } from 'react';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -9,13 +8,42 @@ import { toast } from 'sonner';
 
 // Unicode characters to clean with their descriptions and replacement rules
 const UNICODE_CHARS = {
-  '\u00A0': { name: 'No-Break Space', replaceWith: ' ' },
+  // White_Space = yes characters (25 characters)
+  '\u0009': { name: 'Character Tabulation (HT)', replaceWith: '\t' },
+  '\u000A': { name: 'Line Feed (LF)', replaceWith: '\n' },
+  '\u000B': { name: 'Line Tabulation (VT)', replaceWith: ' ' },
+  '\u000C': { name: 'Form Feed (FF)', replaceWith: ' ' },
+  '\u000D': { name: 'Carriage Return (CR)', replaceWith: '\r' },
+  '\u0020': { name: 'Space', replaceWith: ' ' },
+  '\u0085': { name: 'Next Line (NEL)', replaceWith: '\n' },
+  '\u00A0': { name: 'No-Break Space (NBSP)', replaceWith: ' ' },
+  '\u1680': { name: 'Ogham Space Mark', replaceWith: ' ' },
+  '\u2000': { name: 'En Quad', replaceWith: ' ' },
+  '\u2001': { name: 'Em Quad', replaceWith: ' ' },
+  '\u2002': { name: 'En Space', replaceWith: ' ' },
+  '\u2003': { name: 'Em Space', replaceWith: ' ' },
+  '\u2004': { name: 'Three-Per-Em Space', replaceWith: ' ' },
+  '\u2005': { name: 'Four-Per-Em Space', replaceWith: ' ' },
+  '\u2006': { name: 'Six-Per-Em Space', replaceWith: ' ' },
+  '\u2007': { name: 'Figure Space', replaceWith: ' ' },
+  '\u2008': { name: 'Punctuation Space', replaceWith: ' ' },
+  '\u2009': { name: 'Thin Space', replaceWith: ' ' },
+  '\u200A': { name: 'Hair Space', replaceWith: ' ' },
+  '\u2028': { name: 'Line Separator', replaceWith: '\n' },
+  '\u2029': { name: 'Paragraph Separator', replaceWith: '\n\n' },
+  '\u202F': { name: 'Narrow No-Break Space (NNBSP)', replaceWith: ' ' },
+  '\u205F': { name: 'Medium Mathematical Space (MMSP)', replaceWith: ' ' },
+  '\u3000': { name: 'Ideographic Space', replaceWith: ' ' },
+  
+  // Additional invisible formatting characters (White_Space = no)
+  '\u180E': { name: 'Mongolian Vowel Separator (MVS)', replaceWith: '' },
+  '\u200B': { name: 'Zero Width Space (ZWSP)', replaceWith: '' },
+  '\u200C': { name: 'Zero Width Non-Joiner (ZWNJ)', replaceWith: '' },
+  '\u200D': { name: 'Zero Width Joiner (ZWJ)', replaceWith: '' },
+  
+  // Additional characters from the original list
   '\u034F': { name: 'Combining Grapheme Joiner', replaceWith: '' },
   '\u061C': { name: 'Arabic Letter Mark', replaceWith: '' },
-  '\u180E': { name: 'Mongolian Vowel Separator', replaceWith: '' },
-  '\u200B': { name: 'Zero Width Space', replaceWith: '' },
-  '\u200C': { name: 'Zero Width Non-Joiner', replaceWith: '' },
-  '\u200D': { name: 'Zero Width Joiner', replaceWith: '' },
   '\u200E': { name: 'Left-to-Right Mark', replaceWith: '' },
   '\u200F': { name: 'Right-to-Left Mark', replaceWith: '' },
   '\u202A': { name: 'Left-to-Right Embedding', replaceWith: '' },
@@ -23,8 +51,6 @@ const UNICODE_CHARS = {
   '\u202C': { name: 'Pop Directional Formatting', replaceWith: '' },
   '\u202D': { name: 'Left-to-Right Override', replaceWith: '' },
   '\u202E': { name: 'Right-to-Left Override', replaceWith: '' },
-  '\u202F': { name: 'Narrow No-Break Space', replaceWith: ' ' },
-  '\u205F': { name: 'Medium Mathematical Space', replaceWith: ' ' },
   '\u2060': { name: 'Word Joiner', replaceWith: '' },
   '\u2061': { name: 'Function Application', replaceWith: '' },
   '\u2062': { name: 'Invisible Times', replaceWith: '' },
@@ -42,7 +68,6 @@ const UNICODE_CHARS = {
   '\u206E': { name: 'National Digit Shapes', replaceWith: '' },
   '\u206F': { name: 'Nominal Digit Shapes', replaceWith: '' },
   '\u2800': { name: 'Braille Pattern Blank', replaceWith: ' ' },
-  '\u3000': { name: 'Ideographic Space', replaceWith: ' ' },
   '\uFEFF': { name: 'Zero Width No-Break Space', replaceWith: '' },
   '\uFFA0': { name: 'Halfwidth Hangul Filler', replaceWith: '' },
   '\uFFFC': { name: 'Object Replacement Character', replaceWith: '' },
@@ -268,11 +293,11 @@ const Index = () => {
                   die häufig in kopierten Texten vorkommen.
                 </p>
                 <p>
-                  Alle erkannten Zeichen werden entweder durch ein normales Leerzeichen ersetzt
-                  oder vollständig entfernt, abhängig von ihrer typischen Verwendung.
+                  Alle erkannten Zeichen werden entsprechend ihrer typischen Verwendung behandelt:
+                  Leerzeichen werden normalisiert, unsichtbare Formatierungszeichen entfernt.
                 </p>
                 <p className="font-medium text-slate-700">
-                  Überwacht: {Object.keys(UNICODE_CHARS).length} verschiedene unsichtbare Zeichen
+                  Überwacht: {Object.keys(UNICODE_CHARS).length} verschiedene Unicode-Zeichen
                 </p>
               </div>
             </Card>

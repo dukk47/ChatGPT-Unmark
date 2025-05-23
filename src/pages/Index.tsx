@@ -1,6 +1,6 @@
-
 import React, { useState, useCallback, useMemo, useRef } from 'react';
 import { toast } from 'sonner';
+import { Link } from 'react-router-dom';
 import { useTextCleaner } from '@/hooks/useTextCleaner';
 import { AppHeader } from '@/components/AppHeader';
 import { AIWatermarkAlert } from '@/components/AIWatermarkAlert';
@@ -134,6 +134,18 @@ const Index = () => {
           open={showInfoDialog} 
           onOpenChange={setShowInfoDialog} 
         />
+
+        {/* Footer with Impressum link */}
+        <footer className="mt-16 pt-8 border-t border-slate-800/50">
+          <div className="text-center">
+            <Link 
+              to="/impressum" 
+              className="text-xs text-slate-500 hover:text-slate-400 transition-colors duration-200 underline"
+            >
+              {t('impressum')}
+            </Link>
+          </div>
+        </footer>
       </div>
     </div>
   );

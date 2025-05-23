@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -30,7 +29,7 @@ export const FoundCharacters = ({ foundChars, onCharacterClick }: FoundCharacter
   const problematicChars = foundChars.filter(char => !SAFE_CHARS.includes(char.char));
 
   return (
-    <Card className="bg-slate-900/50 border-slate-700 backdrop-blur-sm shadow-2xl animate-scale-in">
+    <Card className="bg-slate-900/50 border-slate-700 backdrop-blur-sm shadow-2xl animate-in fade-in scale-in duration-700">
       <CardHeader>
         <CardTitle className="text-xl font-bold flex items-center justify-between text-slate-200">
           <span className="flex items-center gap-2">

@@ -146,8 +146,12 @@
 /* Enhanced smooth animations */
 @layer utilities {
   .animate-in {
-    animation-duration: 0.7s;
+    animation-duration: 1s;
     animation-fill-mode: both;
+  }
+
+  .animate-delay-300 {
+    animation-delay: 0.3s;
   }
 
   .slide-in-from-right-8 {
@@ -158,13 +162,17 @@
     animation-name: fade-in;
   }
 
+  .scale-in {
+    animation-name: scale-in;
+  }
+
   @keyframes slide-in-from-right-8 {
     from {
-      transform: translateX(2rem);
+      transform: translateX(3rem) scale(0.95);
       opacity: 0;
     }
     to {
-      transform: translateX(0);
+      transform: translateX(0) scale(1);
       opacity: 1;
     }
   }
@@ -177,5 +185,15 @@
       opacity: 1;
     }
   }
-}
 
+  @keyframes scale-in {
+    from {
+      transform: scale(0.9);
+      opacity: 0;
+    }
+    to {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+}

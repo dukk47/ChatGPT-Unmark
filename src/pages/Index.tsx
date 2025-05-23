@@ -1,5 +1,3 @@
-
-
 import React, { useState, useCallback, useMemo, useRef } from 'react';
 import { toast } from 'sonner';
 import { Link } from 'react-router-dom';
@@ -102,10 +100,10 @@ const Index = () => {
         />
 
         <div className="space-y-8">
-          <div className={`grid gap-8 transition-all duration-700 ease-out ${
+          <div className={`grid gap-8 transition-all duration-1000 ease-in-out ${
             foundChars.length > 0 ? 'grid-cols-1 lg:grid-cols-3' : 'grid-cols-1'
           }`}>
-            <div className={`transition-all duration-700 ease-out transform ${
+            <div className={`transition-all duration-1000 ease-in-out transform ${
               foundChars.length > 0 ? 'lg:col-span-2' : 'col-span-1'
             }`}>
               <TextInputOutput 
@@ -119,7 +117,7 @@ const Index = () => {
               />
             </div>
             {foundChars.length > 0 && (
-              <div className="lg:col-span-1 transition-all duration-700 ease-out transform animate-in slide-in-from-right-8 fade-in">
+              <div className="lg:col-span-1 transition-all duration-1000 ease-in-out transform animate-in slide-in-from-right-8 fade-in scale-in opacity-0 animate-delay-300">
                 <FoundCharacters 
                   foundChars={foundChars} 
                   onCharacterClick={handleCharacterClick}
@@ -160,4 +158,3 @@ const Index = () => {
 };
 
 export default Index;
-

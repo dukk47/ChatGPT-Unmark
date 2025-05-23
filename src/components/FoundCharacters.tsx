@@ -2,9 +2,11 @@
 import React from 'react';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
+import { MousePointer } from 'lucide-react';
 
 interface FoundCharactersProps {
   foundChars: { char: string; count: number; name: string; code: string }[];
+  onCharacterClick?: (char: string) => void;
 }
 
 // Characters that are generally "safe" and expected
@@ -18,7 +20,7 @@ const SAFE_CHARS = [
   '\u2029', // PARAGRAPH SEPARATOR
 ];
 
-export const FoundCharacters = ({ foundChars }: FoundCharactersProps) => {
+export const FoundCharacters = ({ foundChars, onCharacterClick }: FoundCharactersProps) => {
   if (foundChars.length === 0) return null;
 
   const safeChars = foundChars.filter(char => SAFE_CHARS.includes(char.char));
@@ -51,7 +53,8 @@ export const FoundCharacters = ({ foundChars }: FoundCharactersProps) => {
           {safeChars.map((char, index) => (
             <div 
               key={`safe-${index}`} 
-              className="flex justify-between items-center p-4 bg-green-900/10 border border-green-700/30 rounded-lg backdrop-blur-sm hover:bg-green-900/20 transition-all duration-200"
+              className="flex justify-between items-center p-4 bg-green-900/10 border border-green-700/30 rounded-lg backdrop-blur-sm hover:bg-green-900/20 transition-all duration-200 cursor-pointer group"
+              onClick={() => onCharacterClick?.(char.char)}
             >
               <div>
                 <span className="font-mono text-base font-bold text-green-300 bg-green-800/30 px-3 py-1 rounded-md">
@@ -59,12 +62,15 @@ export const FoundCharacters = ({ foundChars }: FoundCharactersProps) => {
                 </span>
                 <p className="text-sm text-green-200/80 mt-2 font-medium">{char.name}</p>
               </div>
-              <Badge 
-                variant="outline" 
-                className="bg-green-900/30 text-green-300 border-green-700 px-4 py-2 font-bold backdrop-blur-sm"
-              >
-                {char.count}×
-              </Badge>
+              <div className="flex items-center gap-2">
+                <Badge 
+                  variant="outline" 
+                  className="bg-green-900/30 text-green-300 border-green-700 px-4 py-2 font-bold backdrop-blur-sm"
+                >
+                  {char.count}×
+                </Badge>
+                <MousePointer className="w-4 h-4 text-green-400/60 opacity-0 group-hover:opacity-100 transition-opacity" />
+              </div>
             </div>
           ))}
           
@@ -72,7 +78,8 @@ export const FoundCharacters = ({ foundChars }: FoundCharactersProps) => {
           {problematicChars.map((char, index) => (
             <div 
               key={`problem-${index}`} 
-              className="flex justify-between items-center p-4 bg-orange-900/10 border border-orange-700/30 rounded-lg backdrop-blur-sm hover:bg-orange-900/20 transition-all duration-200"
+              className="flex justify-between items-center p-4 bg-orange-900/10 border border-orange-700/30 rounded-lg backdrop-blur-sm hover:bg-orange-900/20 transition-all duration-200 cursor-pointer group"
+              onClick={() => onCharacterClick?.(char.char)}
             >
               <div>
                 <span className="font-mono text-base font-bold text-orange-300 bg-orange-800/30 px-3 py-1 rounded-md">
@@ -80,12 +87,15 @@ export const FoundCharacters = ({ foundChars }: FoundCharactersProps) => {
                 </span>
                 <p className="text-sm text-orange-200/80 mt-2 font-medium">{char.name}</p>
               </div>
-              <Badge 
-                variant="outline" 
-                className="bg-orange-900/30 text-orange-300 border-orange-700 px-4 py-2 font-bold backdrop-blur-sm"
-              >
-                {char.count}×
-              </Badge>
+              <div className="flex items-center gap-2">
+                <Badge 
+                  variant="outline" 
+                  className="bg-orange-900/30 text-orange-300 border-orange-700 px-4 py-2 font-bold backdrop-blur-sm"
+                >
+                  {char.count}×
+                </Badge>
+                <MousePointer className="w-4 h-4 text-orange-400/60 opacity-0 group-hover:opacity-100 transition-opacity" />
+              </div>
             </div>
           ))}
         </div>

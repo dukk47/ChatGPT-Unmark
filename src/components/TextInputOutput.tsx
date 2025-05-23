@@ -15,14 +15,16 @@ interface TextInputOutputProps {
   };
   highlightWatermarks?: boolean;
   watermarkChars?: { char: string; count: number; name: string; code: string }[];
+  highlightedChar?: string;
 }
 
 export interface TextInputOutputRef {
   scrollToWatermarks: () => void;
+  scrollToCharacter: (char: string) => void;
 }
 
 export const TextInputOutput = forwardRef<TextInputOutputRef, TextInputOutputProps>(
-  ({ inputText, onInputChange, stats, highlightWatermarks = false, watermarkChars = [] }, ref) => {
+  ({ inputText, onInputChange, stats, highlightWatermarks = false, watermarkChars = [], highlightedChar }, ref) => {
     const textareaRef = useRef<HTMLTextAreaElement>(null);
 
     useImperativeHandle(ref, () => ({
@@ -38,11 +40,24 @@ export const TextInputOutput = forwardRef<TextInputOutputRef, TextInputOutputPro
             textareaRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
           }
         }
+      },
+      scrollToCharacter: (char: string) => {
+        if (textareaRef.current) {
+          const position = inputText.indexOf(char);
+          
+          if (position !== -1) {
+            textareaRef.current.focus();
+            textareaRef.current.setSelectionRange(position, position + 1);
+            textareaRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }
+        }
       }
     }));
 
     const renderTextWithHighlights = () => {
-      if (!highlightWatermarks || watermarkChars.length === 0) {
+      const shouldHighlight = highlightWatermarks || highlightedChar;
+      
+      if (!shouldHighlight) {
         return (
           <Textarea
             ref={textareaRef}
@@ -57,10 +72,18 @@ export const TextInputOutput = forwardRef<TextInputOutputRef, TextInputOutputPro
 
       // Create highlighted version in overlay
       let highlightedText = inputText;
-      watermarkChars.forEach(({ char }) => {
-        const regex = new RegExp(char, 'g');
-        highlightedText = highlightedText.replace(regex, `<mark class="bg-red-500/30 text-red-200">${char}</mark>`);
-      });
+      
+      if (highlightWatermarks && watermarkChars.length > 0) {
+        watermarkChars.forEach(({ char }) => {
+          const regex = new RegExp(char.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g');
+          highlightedText = highlightedText.replace(regex, `<mark class="bg-red-500/30 text-red-200">${char}</mark>`);
+        });
+      }
+      
+      if (highlightedChar) {
+        const regex = new RegExp(highlightedChar.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g');
+        highlightedText = highlightedText.replace(regex, `<mark class="bg-blue-500/30 text-blue-200">${highlightedChar}</mark>`);
+      }
 
       return (
         <div className="relative">

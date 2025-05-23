@@ -1,4 +1,3 @@
-
 import React, { useState, useCallback, useMemo, useRef } from 'react';
 import { toast } from 'sonner';
 import { useTextCleaner } from '@/hooks/useTextCleaner';
@@ -14,6 +13,7 @@ const Index = () => {
   const [copiedRecently, setCopiedRecently] = useState(false);
   const [showInfoDialog, setShowInfoDialog] = useState(false);
   const [highlightWatermarks, setHighlightWatermarks] = useState(false);
+  const [highlightedChar, setHighlightedChar] = useState<string>('');
   
   const textInputRef = useRef<TextInputOutputRef>(null);
 
@@ -28,10 +28,20 @@ const Index = () => {
 
   const handleShowWatermarksInText = useCallback(() => {
     setHighlightWatermarks(true);
+    setHighlightedChar('');
     setTimeout(() => {
       textInputRef.current?.scrollToWatermarks();
     }, 100);
     toast.success('AI-Wasserzeichen im Text hervorgehoben');
+  }, []);
+
+  const handleCharacterClick = useCallback((char: string) => {
+    setHighlightedChar(char);
+    setHighlightWatermarks(false);
+    setTimeout(() => {
+      textInputRef.current?.scrollToCharacter(char);
+    }, 100);
+    toast.success('Zeichen im Text hervorgehoben');
   }, []);
 
   const copyToClipboard = useCallback(async () => {
@@ -61,6 +71,7 @@ const Index = () => {
   const clearAll = useCallback(() => {
     setInputText('');
     setHighlightWatermarks(false);
+    setHighlightedChar('');
     toast.success('Text gelöscht');
   }, []);
 
@@ -95,10 +106,14 @@ const Index = () => {
                 stats={stats}
                 highlightWatermarks={highlightWatermarks}
                 watermarkChars={watermarkChars}
+                highlightedChar={highlightedChar}
               />
             </div>
             <div className="lg:col-span-1">
-              <FoundCharacters foundChars={foundChars} />
+              <FoundCharacters 
+                foundChars={foundChars} 
+                onCharacterClick={handleCharacterClick}
+              />
             </div>
           </div>
 

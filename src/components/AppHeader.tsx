@@ -54,16 +54,6 @@ export const AppHeader = ({ onInfoClick }: AppHeaderProps) => {
           </Button>
         </Link>
         
-        <Link to="/impressum">
-          <Button 
-            variant="ghost" 
-            size="sm"
-            className="text-slate-400 hover:text-slate-300 hover:bg-slate-800/50 border border-slate-700 backdrop-blur-sm transition-all duration-200"
-          >
-            {t('impressum')}
-          </Button>
-        </Link>
-        
         <LanguageSwitcher />
       </div>
     </div>

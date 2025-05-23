@@ -1,3 +1,4 @@
+
 import React, { useState, useCallback, useMemo } from 'react';
 import { toast } from 'sonner';
 import { useTextCleaner } from '@/hooks/useTextCleaner';
@@ -60,10 +61,9 @@ const Index = () => {
         <div className="absolute top-3/4 left-3/4 w-64 h-64 bg-indigo-500/5 rounded-full blur-3xl animate-pulse delay-500"></div>
       </div>
 
-      {/* Grid pattern overlay */}
       <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:50px_50px] pointer-events-none"></div>
 
-      <div className="container mx-auto px-4 py-8 max-w-4xl relative z-10">
+      <div className="container mx-auto px-4 py-8 max-w-7xl relative z-10">
         <AppHeader 
           onInfoClick={() => setShowInfoDialog(true)} 
         />
@@ -71,11 +71,18 @@ const Index = () => {
         <AIWatermarkAlert watermarkChars={watermarkChars} />
 
         <div className="space-y-8">
-          <TextInputOutput 
-            inputText={inputText}
-            onInputChange={setInputText}
-            stats={stats}
-          />
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <div className="lg:col-span-2">
+              <TextInputOutput 
+                inputText={inputText}
+                onInputChange={setInputText}
+                stats={stats}
+              />
+            </div>
+            <div className="lg:col-span-1">
+              <FoundCharacters foundChars={foundChars} />
+            </div>
+          </div>
 
           <ActionButtons 
             cleanedText={cleanedText}
@@ -85,8 +92,6 @@ const Index = () => {
             onDownload={downloadCleanedText}
             onClear={clearAll}
           />
-
-          <FoundCharacters foundChars={foundChars} />
         </div>
 
         <InfoDialog 

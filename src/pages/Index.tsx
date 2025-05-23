@@ -27,10 +27,10 @@ const Index = () => {
     try {
       await navigator.clipboard.writeText(cleanedText);
       setCopiedRecently(true);
-      toast.success('Bereinigter Text wurde in die Zwischenablage kopiert! ✨');
+      toast.success('Text erfolgreich kopiert');
       setTimeout(() => setCopiedRecently(false), 2000);
     } catch (err) {
-      toast.error('Fehler beim Kopieren in die Zwischenablage');
+      toast.error('Fehler beim Kopieren');
     }
   }, [cleanedText]);
 
@@ -44,22 +44,25 @@ const Index = () => {
     a.click();
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
-    toast.success('Bereinigter Text wurde heruntergeladen! 🎉');
+    toast.success('Download gestartet');
   }, [cleanedText]);
 
   const clearAll = useCallback(() => {
     setInputText('');
-    toast.success('Text wurde gelöscht ✨');
+    toast.success('Text gelöscht');
   }, []);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-violet-50 via-purple-50 to-indigo-100 dark:from-slate-900 dark:via-purple-900/20 dark:to-slate-800 relative overflow-hidden">
-      {/* Animated background elements */}
+    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-gray-900 to-slate-900 relative overflow-hidden">
+      {/* Subtle animated background elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute -top-4 -left-4 w-72 h-72 bg-gradient-to-r from-pink-300/20 to-violet-300/20 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute -bottom-8 -right-8 w-96 h-96 bg-gradient-to-r from-blue-300/20 to-cyan-300/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-gradient-to-r from-indigo-300/10 to-purple-300/10 rounded-full blur-3xl animate-pulse delay-500"></div>
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-cyan-500/5 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-blue-500/5 rounded-full blur-3xl animate-pulse delay-1000"></div>
+        <div className="absolute top-3/4 left-3/4 w-64 h-64 bg-indigo-500/5 rounded-full blur-3xl animate-pulse delay-500"></div>
       </div>
+
+      {/* Grid pattern overlay */}
+      <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:50px_50px] pointer-events-none"></div>
 
       <div className="container mx-auto px-4 py-8 max-w-6xl relative z-10">
         <AppHeader 

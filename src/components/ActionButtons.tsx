@@ -25,28 +25,28 @@ export const ActionButtons = ({
       <Button
         onClick={onCopy}
         disabled={!cleanedText}
-        className="bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 text-white px-8 py-3 rounded-2xl font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
+        className="bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white px-8 py-3 font-semibold shadow-lg hover:shadow-cyan-500/25 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed backdrop-blur-sm"
       >
         <Copy className="w-5 h-5 mr-2" />
-        {copiedRecently ? '✅ Kopiert!' : '📋 Kopieren'}
+        {copiedRecently ? 'Kopiert!' : 'Kopieren'}
       </Button>
       <Button
         onClick={onDownload}
         disabled={!cleanedText}
         variant="outline"
-        className="bg-gradient-to-r from-purple-50 to-indigo-50 hover:from-purple-100 hover:to-indigo-100 border-2 border-purple-200 hover:border-purple-300 text-purple-700 hover:text-purple-800 px-8 py-3 rounded-2xl font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 disabled:opacity-50"
+        className="bg-slate-800/50 hover:bg-slate-700/50 border border-slate-600 hover:border-slate-500 text-slate-200 hover:text-slate-100 px-8 py-3 font-semibold shadow-lg hover:shadow-indigo-500/25 transition-all duration-300 disabled:opacity-50 backdrop-blur-sm"
       >
         <Download className="w-5 h-5 mr-2" />
-        📥 Herunterladen
+        Herunterladen
       </Button>
       <Button
         onClick={onClear}
         disabled={!inputText}
         variant="outline"
-        className="bg-gradient-to-r from-red-50 to-pink-50 hover:from-red-100 hover:to-pink-100 border-2 border-red-200 hover:border-red-300 text-red-700 hover:text-red-800 px-8 py-3 rounded-2xl font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 disabled:opacity-50"
+        className="bg-red-950/30 hover:bg-red-900/40 border border-red-800 hover:border-red-700 text-red-300 hover:text-red-200 px-8 py-3 font-semibold shadow-lg hover:shadow-red-500/25 transition-all duration-300 disabled:opacity-50 backdrop-blur-sm"
       >
         <Trash2 className="w-5 h-5 mr-2" />
-        🗑️ Löschen
+        Löschen
       </Button>
     </div>
   );

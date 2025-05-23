@@ -11,14 +11,14 @@ export const FoundCharacters = ({ foundChars }: FoundCharactersProps) => {
   if (foundChars.length === 0) return null;
 
   return (
-    <Card className="shadow-xl border-0 bg-gradient-to-br from-white to-orange-50/50 dark:from-slate-800 dark:to-slate-800/50 rounded-3xl overflow-hidden animate-scale-in">
-      <CardHeader className="bg-gradient-to-r from-orange-500/10 to-yellow-500/10">
-        <CardTitle className="text-xl font-bold flex items-center justify-between text-orange-800 dark:text-orange-300">
+    <Card className="bg-slate-900/50 border-slate-700 backdrop-blur-sm shadow-2xl animate-scale-in">
+      <CardHeader>
+        <CardTitle className="text-xl font-bold flex items-center justify-between text-slate-200">
           <span className="flex items-center gap-2">
-            🔍 Gefundene unsichtbare Zeichen
+            Gefundene unsichtbare Zeichen
           </span>
-          <Badge variant="secondary" className="bg-gradient-to-r from-orange-100 to-yellow-100 text-orange-800 border-orange-200 px-4 py-2 rounded-full font-bold shadow-sm">
-            🎯 {foundChars.length} Typen
+          <Badge variant="secondary" className="bg-slate-800/50 text-slate-300 border-slate-600 px-4 py-2 font-bold backdrop-blur-sm">
+            {foundChars.length} Typen
           </Badge>
         </CardTitle>
       </CardHeader>
@@ -27,19 +27,19 @@ export const FoundCharacters = ({ foundChars }: FoundCharactersProps) => {
           {foundChars.map((char, index) => (
             <div 
               key={index} 
-              className="flex justify-between items-center p-4 bg-gradient-to-r from-orange-50 to-yellow-50 dark:from-slate-700 dark:to-slate-700 rounded-2xl border border-orange-200 dark:border-slate-600 shadow-md hover:shadow-lg transition-all duration-200 hover:scale-[1.02]"
+              className="flex justify-between items-center p-4 bg-slate-800/30 border border-slate-700 rounded-lg backdrop-blur-sm hover:bg-slate-800/50 transition-all duration-200"
             >
               <div>
-                <span className="font-mono text-base font-bold text-orange-700 dark:text-orange-300 bg-orange-100 dark:bg-orange-900/30 px-3 py-1 rounded-full">
+                <span className="font-mono text-base font-bold text-cyan-300 bg-slate-800/50 px-3 py-1 rounded-md">
                   {char.code}
                 </span>
-                <p className="text-sm text-orange-600 dark:text-orange-400 mt-2 font-medium">{char.name}</p>
+                <p className="text-sm text-slate-400 mt-2 font-medium">{char.name}</p>
               </div>
               <Badge 
                 variant="outline" 
-                className="bg-gradient-to-r from-blue-500 to-indigo-500 text-white border-0 px-4 py-2 rounded-full font-bold shadow-md hover:shadow-lg transition-all duration-200"
+                className="bg-indigo-900/30 text-indigo-300 border-indigo-700 px-4 py-2 font-bold backdrop-blur-sm"
               >
-                {char.count}× 🎯
+                {char.count}×
               </Badge>
             </div>
           ))}

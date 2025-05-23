@@ -1,10 +1,12 @@
+
 import React, { useState, useCallback, useMemo } from 'react';
-import { Card } from '@/components/ui/card';
+import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Textarea } from '@/components/ui/textarea';
-import { Download, Copy, Trash2, FileText, AlertCircle } from 'lucide-react';
+import { Download, Copy, Trash2, FileText, AlertCircle, Info, Shield } from 'lucide-react';
 import { toast } from 'sonner';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 
 // Unicode characters to clean with their descriptions and replacement rules
 const UNICODE_CHARS = {
@@ -76,6 +78,7 @@ const UNICODE_CHARS = {
 const Index = () => {
   const [inputText, setInputText] = useState('');
   const [copiedRecently, setCopiedRecently] = useState(false);
+  const [showInfoDialog, setShowInfoDialog] = useState(false);
 
   // Clean text and analyze invisible characters
   const { cleanedText, foundChars, stats } = useMemo(() => {
@@ -138,76 +141,110 @@ const Index = () => {
   }, []);
 
   const hasInvisibleChars = foundChars.length > 0;
+  
+  // Group the found characters by category for better explanation
+  const watermarkChars = useMemo(() => {
+    return foundChars.filter(char => 
+      ['\u200B', '\u200C', '\u200D', '\u202F'].includes(char.char)
+    );
+  }, [foundChars]);
+
+  const hasWatermarkChars = watermarkChars.length > 0;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-slate-100">
-      <div className="container mx-auto px-4 py-8 max-w-7xl">
+    <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-blue-50 to-purple-50 dark:from-slate-900 dark:via-indigo-950 dark:to-slate-950">
+      <div className="container mx-auto px-4 py-8 max-w-6xl">
         {/* Header */}
         <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-slate-800 mb-3 flex items-center justify-center gap-3">
-            <FileText className="w-10 h-10 text-blue-600" />
+          <h1 className="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-violet-600 mb-3 flex items-center justify-center gap-3">
+            <Shield className="w-10 h-10 text-blue-600" />
             ChatGPT Unmark
           </h1>
-          <p className="text-lg text-slate-600 max-w-2xl mx-auto">
-            Entfernt unsichtbare Unicode-Zeichen aus Ihren Texten für eine saubere Formatierung
+          <p className="text-lg text-slate-600 dark:text-slate-300 max-w-2xl mx-auto">
+            Entfernt unsichtbare Unicode-Zeichen und AI-Wasserzeichen aus Ihren Texten
           </p>
+          
+          <div className="mt-4 flex justify-center">
+            <Button 
+              variant="outline" 
+              onClick={() => setShowInfoDialog(true)}
+              className="text-blue-600 border-blue-300 hover:bg-blue-50 flex gap-2 items-center"
+            >
+              <Info className="w-4 h-4" />
+              Über AI-Wasserzeichen
+            </Button>
+          </div>
         </div>
 
         <div className="grid lg:grid-cols-3 gap-6">
           {/* Main Content */}
           <div className="lg:col-span-2 space-y-6">
             {/* Input Section */}
-            <Card className="p-6 shadow-lg border-0 bg-white/70 backdrop-blur-sm">
-              <div className="flex items-center justify-between mb-4">
-                <h2 className="text-xl font-semibold text-slate-800">Ursprungstext</h2>
-                <div className="flex gap-2">
-                  <Badge variant="secondary" className="text-sm">
-                    {stats.originalLength} Zeichen
-                  </Badge>
-                  {stats.invisibleCharsFound > 0 && (
-                    <Badge variant="destructive" className="text-sm">
-                      <AlertCircle className="w-3 h-3 mr-1" />
-                      {stats.invisibleCharsFound} unsichtbare Zeichen
+            <Card className="overflow-hidden border-0 shadow-xl shadow-blue-900/5 bg-white/80 backdrop-blur-sm dark:bg-slate-900/80">
+              <CardHeader className="border-b border-slate-100 dark:border-slate-800 bg-white dark:bg-slate-900/90">
+                <div className="flex items-center justify-between">
+                  <CardTitle className="text-xl font-semibold text-slate-800 dark:text-slate-200">Ursprungstext</CardTitle>
+                  <div className="flex gap-2">
+                    <Badge variant="secondary" className="text-sm">
+                      {stats.originalLength} Zeichen
                     </Badge>
-                  )}
+                    {stats.invisibleCharsFound > 0 && (
+                      <Badge variant="destructive" className="text-sm">
+                        <AlertCircle className="w-3 h-3 mr-1" />
+                        {stats.invisibleCharsFound} unsichtbare Zeichen
+                      </Badge>
+                    )}
+                  </div>
                 </div>
-              </div>
-              <Textarea
-                placeholder="Fügen Sie hier Ihren Text ein, um ihn von unsichtbaren Unicode-Zeichen zu bereinigen..."
-                value={inputText}
-                onChange={(e) => setInputText(e.target.value)}
-                className="min-h-[200px] resize-none border-slate-200 focus:border-blue-400 focus:ring-blue-400/20"
-              />
+                <CardDescription className="text-slate-500 dark:text-slate-400">
+                  Fügen Sie hier Ihren Text ein, um AI-Wasserzeichen zu entfernen
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="p-0">
+                <Textarea
+                  placeholder="Fügen Sie hier Ihren Text ein, um ihn von unsichtbaren Unicode-Zeichen zu bereinigen..."
+                  value={inputText}
+                  onChange={(e) => setInputText(e.target.value)}
+                  className="min-h-[240px] resize-none border-0 rounded-none focus:ring-0 focus:border-0 shadow-none bg-transparent text-slate-700 dark:text-slate-200"
+                />
+              </CardContent>
             </Card>
 
             {/* Output Section */}
-            <Card className="p-6 shadow-lg border-0 bg-white/70 backdrop-blur-sm">
-              <div className="flex items-center justify-between mb-4">
-                <h2 className="text-xl font-semibold text-slate-800">Bereinigter Text</h2>
-                <div className="flex gap-2">
-                  <Badge variant="secondary" className="text-sm">
-                    {stats.cleanedLength} Zeichen
-                  </Badge>
-                  {stats.charactersRemoved > 0 && (
-                    <Badge variant="outline" className="text-sm text-green-700 border-green-300">
-                      {stats.charactersRemoved} entfernt
+            <Card className="overflow-hidden border-0 shadow-xl shadow-blue-900/5 bg-white/80 backdrop-blur-sm dark:bg-slate-900/80">
+              <CardHeader className="border-b border-slate-100 dark:border-slate-800 bg-white dark:bg-slate-900/90">
+                <div className="flex items-center justify-between">
+                  <CardTitle className="text-xl font-semibold text-slate-800 dark:text-slate-200">Bereinigter Text</CardTitle>
+                  <div className="flex gap-2">
+                    <Badge variant="secondary" className="text-sm">
+                      {stats.cleanedLength} Zeichen
                     </Badge>
-                  )}
+                    {stats.charactersRemoved > 0 && (
+                      <Badge variant="outline" className="text-sm text-green-700 border-green-300 dark:text-green-500 dark:border-green-800">
+                        {stats.charactersRemoved} entfernt
+                      </Badge>
+                    )}
+                  </div>
                 </div>
-              </div>
-              <Textarea
-                value={cleanedText}
-                readOnly
-                className="min-h-[200px] resize-none bg-slate-50 border-slate-200 cursor-text"
-                placeholder="Der bereinigte Text erscheint hier..."
-              />
+                <CardDescription className="text-slate-500 dark:text-slate-400">
+                  Ihr Text ohne unsichtbare Zeichen und Wassermarken
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="p-0">
+                <Textarea
+                  value={cleanedText}
+                  readOnly
+                  className="min-h-[240px] resize-none border-0 rounded-none focus:ring-0 focus:border-0 shadow-none bg-transparent text-slate-700 dark:text-slate-200"
+                  placeholder="Der bereinigte Text erscheint hier..."
+                />
+              </CardContent>
               
               {/* Action Buttons */}
-              <div className="flex gap-3 mt-4">
+              <div className="p-4 border-t border-slate-100 dark:border-slate-800 flex gap-3 bg-white dark:bg-slate-900/90">
                 <Button
                   onClick={copyToClipboard}
                   disabled={!cleanedText}
-                  className="flex-1 bg-blue-600 hover:bg-blue-700 text-white transition-all duration-200"
+                  className="flex-1 bg-blue-600 hover:bg-blue-700 text-white dark:bg-blue-700 dark:hover:bg-blue-800 transition-all duration-200"
                 >
                   <Copy className="w-4 h-4 mr-2" />
                   {copiedRecently ? 'Kopiert!' : 'Kopieren'}
@@ -216,7 +253,7 @@ const Index = () => {
                   onClick={downloadCleanedText}
                   disabled={!cleanedText}
                   variant="outline"
-                  className="flex-1 border-blue-300 text-blue-700 hover:bg-blue-50 transition-all duration-200"
+                  className="flex-1 border-blue-300 text-blue-700 hover:bg-blue-50 dark:border-blue-800 dark:text-blue-400 dark:hover:bg-blue-950 transition-all duration-200"
                 >
                   <Download className="w-4 h-4 mr-2" />
                   Herunterladen
@@ -225,7 +262,7 @@ const Index = () => {
                   onClick={clearAll}
                   disabled={!inputText}
                   variant="outline"
-                  className="border-red-300 text-red-700 hover:bg-red-50 transition-all duration-200"
+                  className="border-red-300 text-red-700 hover:bg-red-50 dark:border-red-900 dark:text-red-400 dark:hover:bg-red-950 transition-all duration-200"
                 >
                   <Trash2 className="w-4 h-4" />
                 </Button>
@@ -235,75 +272,180 @@ const Index = () => {
 
           {/* Sidebar */}
           <div className="space-y-6">
+            {/* Watermark Alert - only show if watermarking chars found */}
+            {hasWatermarkChars && (
+              <Card className="overflow-hidden border-0 shadow-xl shadow-red-900/5 bg-gradient-to-br from-red-50 to-orange-50 dark:from-red-950 dark:to-red-900">
+                <CardHeader className="border-b border-red-100 dark:border-red-800 bg-white/50 dark:bg-slate-900/20">
+                  <CardTitle className="text-lg font-semibold text-red-800 dark:text-red-300 flex items-center gap-2">
+                    <AlertCircle className="w-5 h-5" />
+                    AI-Wasserzeichen entdeckt
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="p-4">
+                  <p className="text-sm text-red-700 dark:text-red-300 mb-3">
+                    In Ihrem Text wurden spezifische Zeichen gefunden, die häufig als AI-Wasserzeichen verwendet werden:
+                  </p>
+                  <div className="space-y-2">
+                    {watermarkChars.map((char, index) => (
+                      <div key={index} className="p-2 bg-red-100 dark:bg-red-900/50 rounded flex justify-between items-center">
+                        <span className="font-mono text-sm text-red-700 dark:text-red-300">{char.code}</span>
+                        <Badge variant="destructive" className="text-xs">
+                          {char.count}×
+                        </Badge>
+                      </div>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+            )}
+
             {/* Statistics */}
-            <Card className="p-6 shadow-lg border-0 bg-white/70 backdrop-blur-sm">
-              <h3 className="text-lg font-semibold text-slate-800 mb-4">Statistiken</h3>
-              <div className="space-y-3">
+            <Card className="overflow-hidden border-0 shadow-xl shadow-blue-900/5 bg-white/80 backdrop-blur-sm dark:bg-slate-900/80">
+              <CardHeader className="border-b border-slate-100 dark:border-slate-800 bg-white dark:bg-slate-900/90">
+                <CardTitle className="text-lg font-semibold text-slate-800 dark:text-slate-200">Statistiken</CardTitle>
+              </CardHeader>
+              <CardContent className="p-4 space-y-3">
                 <div className="flex justify-between items-center">
-                  <span className="text-slate-600">Originalzeichen:</span>
+                  <span className="text-slate-600 dark:text-slate-400">Originalzeichen:</span>
                   <Badge variant="secondary">{stats.originalLength}</Badge>
                 </div>
                 <div className="flex justify-between items-center">
-                  <span className="text-slate-600">Bereinigte Zeichen:</span>
+                  <span className="text-slate-600 dark:text-slate-400">Bereinigte Zeichen:</span>
                   <Badge variant="secondary">{stats.cleanedLength}</Badge>
                 </div>
                 <div className="flex justify-between items-center">
-                  <span className="text-slate-600">Entfernte Zeichen:</span>
+                  <span className="text-slate-600 dark:text-slate-400">Entfernte Zeichen:</span>
                   <Badge variant={stats.charactersRemoved > 0 ? "destructive" : "secondary"}>
                     {stats.charactersRemoved}
                   </Badge>
                 </div>
                 <div className="flex justify-between items-center">
-                  <span className="text-slate-600">Unsichtbare Zeichen:</span>
+                  <span className="text-slate-600 dark:text-slate-400">Unsichtbare Zeichen:</span>
                   <Badge variant={stats.invisibleCharsFound > 0 ? "destructive" : "secondary"}>
                     {stats.invisibleCharsFound}
                   </Badge>
                 </div>
-              </div>
+              </CardContent>
             </Card>
 
             {/* Found Characters */}
             {hasInvisibleChars && (
-              <Card className="p-6 shadow-lg border-0 bg-white/70 backdrop-blur-sm">
-                <h3 className="text-lg font-semibold text-slate-800 mb-4">
-                  Gefundene unsichtbare Zeichen
-                </h3>
-                <div className="space-y-3 max-h-64 overflow-y-auto">
-                  {foundChars.map((char, index) => (
-                    <div key={index} className="p-3 bg-red-50 border border-red-200 rounded-lg">
-                      <div className="flex justify-between items-start mb-1">
-                        <span className="font-mono text-sm text-red-700">{char.code}</span>
-                        <Badge variant="destructive" className="text-xs">
-                          {char.count}×
-                        </Badge>
+              <Card className="overflow-hidden border-0 shadow-xl shadow-blue-900/5 bg-white/80 backdrop-blur-sm dark:bg-slate-900/80">
+                <CardHeader className="border-b border-slate-100 dark:border-slate-800 bg-white dark:bg-slate-900/90">
+                  <CardTitle className="text-lg font-semibold text-slate-800 dark:text-slate-200">
+                    Gefundene unsichtbare Zeichen
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="p-4">
+                  <div className="space-y-3 max-h-64 overflow-y-auto pr-2">
+                    {foundChars.map((char, index) => (
+                      <div 
+                        key={index} 
+                        className={`p-3 rounded-lg border ${
+                          ['\u200B', '\u200C', '\u200D', '\u202F'].includes(char.char)
+                            ? "bg-red-50 border-red-200 dark:bg-red-950/50 dark:border-red-900" 
+                            : "bg-amber-50 border-amber-200 dark:bg-amber-950/30 dark:border-amber-900"
+                        }`}
+                      >
+                        <div className="flex justify-between items-start mb-1">
+                          <span className="font-mono text-sm text-red-700 dark:text-red-400">{char.code}</span>
+                          <Badge 
+                            variant={['\u200B', '\u200C', '\u200D', '\u202F'].includes(char.char) ? "destructive" : "outline"}
+                            className="text-xs"
+                          >
+                            {char.count}×
+                          </Badge>
+                        </div>
+                        <p className="text-sm text-slate-700 dark:text-slate-300">{char.name}</p>
                       </div>
-                      <p className="text-sm text-slate-700">{char.name}</p>
-                    </div>
-                  ))}
-                </div>
+                    ))}
+                  </div>
+                </CardContent>
               </Card>
             )}
 
             {/* Info Card */}
-            <Card className="p-6 shadow-lg border-0 bg-white/70 backdrop-blur-sm">
-              <h3 className="text-lg font-semibold text-slate-800 mb-4">Information</h3>
-              <div className="space-y-3 text-sm text-slate-600">
-                <p>
-                  Diese Anwendung erkennt und entfernt systematisch unsichtbare Unicode-Zeichen,
-                  die häufig in kopierten Texten vorkommen.
-                </p>
-                <p>
-                  Alle erkannten Zeichen werden entsprechend ihrer typischen Verwendung behandelt:
-                  Leerzeichen werden normalisiert, unsichtbare Formatierungszeichen entfernt.
-                </p>
-                <p className="font-medium text-slate-700">
-                  Überwacht: {Object.keys(UNICODE_CHARS).length} verschiedene Unicode-Zeichen
-                </p>
-              </div>
+            <Card className="overflow-hidden border-0 shadow-xl shadow-blue-900/5 bg-white/80 backdrop-blur-sm dark:bg-slate-900/80">
+              <CardHeader className="border-b border-slate-100 dark:border-slate-800 bg-white dark:bg-slate-900/90">
+                <CardTitle className="text-lg font-semibold text-slate-800 dark:text-slate-200">Information</CardTitle>
+              </CardHeader>
+              <CardContent className="p-4">
+                <div className="space-y-3 text-sm text-slate-600 dark:text-slate-400">
+                  <p>
+                    Diese Anwendung erkennt und entfernt systematisch unsichtbare Unicode-Zeichen,
+                    die als KI-Wasserzeichen eingesetzt werden können.
+                  </p>
+                  <p>
+                    Alle erkannten Zeichen werden entsprechend ihrer typischen Verwendung behandelt:
+                    Leerzeichen werden normalisiert, unsichtbare Formatierungszeichen entfernt.
+                  </p>
+                  <p className="font-medium text-slate-700 dark:text-slate-300">
+                    Überwacht: {Object.keys(UNICODE_CHARS).length} verschiedene Unicode-Zeichen
+                  </p>
+                </div>
+              </CardContent>
             </Card>
           </div>
         </div>
       </div>
+
+      {/* Information Dialog about AI Watermarking */}
+      <Dialog open={showInfoDialog} onOpenChange={setShowInfoDialog}>
+        <DialogContent className="max-w-2xl">
+          <DialogHeader>
+            <DialogTitle className="text-xl">Über AI-Wasserzeichen in Texten</DialogTitle>
+            <DialogDescription className="text-slate-600 dark:text-slate-400">
+              Wie moderne KI-Systeme Texte mit unsichtbaren Markierungen versehen
+            </DialogDescription>
+          </DialogHeader>
+          <div className="space-y-4">
+            <p className="text-slate-700 dark:text-slate-300">
+              OpenAI hat in Experimenten unsichtbare Unicode-Zeichen als Wasserzeichen getestet. 
+              Dabei werden bestimmte Codepoints strategisch in den generierten Text eingeschleust.
+            </p>
+            
+            <div className="space-y-3">
+              <div className="p-3 bg-blue-50 rounded-lg border border-blue-200 dark:bg-blue-950/40 dark:border-blue-900">
+                <div className="font-semibold mb-1 text-blue-800 dark:text-blue-300">U+200B Zero Width Space (ZWSP)</div>
+                <p className="text-sm text-slate-600 dark:text-slate-400">
+                  Wird nach Wörtern oder Satzzeichen eingefügt, nimmt keine Breite ein und übersteht Copy-Paste fast unversehrt.
+                </p>
+              </div>
+              
+              <div className="p-3 bg-blue-50 rounded-lg border border-blue-200 dark:bg-blue-950/40 dark:border-blue-900">
+                <div className="font-semibold mb-1 text-blue-800 dark:text-blue-300">U+200C Zero Width Non-Joiner (ZWNJ)</div>
+                <p className="text-sm text-slate-600 dark:text-slate-400">
+                  Verhindert Ligaturen zwischen Buchstaben, bleibt dabei unsichtbar und trägt zur Kodierung bei.
+                </p>
+              </div>
+              
+              <div className="p-3 bg-blue-50 rounded-lg border border-blue-200 dark:bg-blue-950/40 dark:border-blue-900">
+                <div className="font-semibold mb-1 text-blue-800 dark:text-blue-300">U+200D Zero Width Joiner (ZWJ)</div>
+                <p className="text-sm text-slate-600 dark:text-slate-400">
+                  Erzwingt Ligaturen, dient aber hier als zusätzlicher, unsichtbarer Marker.
+                </p>
+              </div>
+              
+              <div className="p-3 bg-blue-50 rounded-lg border border-blue-200 dark:bg-blue-950/40 dark:border-blue-900">
+                <div className="font-semibold mb-1 text-blue-800 dark:text-blue-300">U+202F Narrow No-Break Space (NNBSP)</div>
+                <p className="text-sm text-slate-600 dark:text-slate-400">
+                  Sieht aus wie ein normales Leerzeichen, ist aber enger und hat einen anderen Codepoint – in Tests systematisch verteilt im Text.
+                </p>
+              </div>
+            </div>
+            
+            <p className="text-slate-700 dark:text-slate-300">
+              Diese Zeichen werden so platziert, dass sie für Menschen unsichtbar bleiben, aber per Skript leicht detektierbar sind. 
+              Copy-Paste-Vorgänge in Texteditoren entfernen sie meist nicht, wodurch der Wasserzeichen-Marker auch in exportierten 
+              Dokumenten bestehen bleibt.
+            </p>
+            
+            <p className="font-semibold text-slate-800 dark:text-slate-200">
+              ChatGPT Unmark hilft Ihnen, diese unsichtbaren Markierungen aufzuspüren und zu entfernen.
+            </p>
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };

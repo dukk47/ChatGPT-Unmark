@@ -17,7 +17,7 @@ export const FoundCharacters = ({ foundChars }: FoundCharactersProps) => {
           <span className="flex items-center gap-2">
             Gefundene unsichtbare Zeichen
           </span>
-          <Badge variant="secondary" className="bg-slate-800/50 text-slate-300 border-slate-600 px-4 py-2 font-bold backdrop-blur-sm">
+          <Badge variant="secondary" className="bg-cyan-900/40 text-cyan-200 border-cyan-700 px-4 py-2 font-bold backdrop-blur-sm hover:bg-cyan-900/60">
             {foundChars.length} Typen
           </Badge>
         </CardTitle>

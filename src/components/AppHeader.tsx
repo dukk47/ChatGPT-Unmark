@@ -24,7 +24,7 @@ export const AppHeader = ({ onInfoClick }: AppHeaderProps) => {
       </div>
       
       <p className="text-xl text-slate-300 mb-8 font-light max-w-2xl mx-auto leading-relaxed">
-        Professionelle Entfernung von AI-Wasserzeichen und unsichtbaren Unicode-Zeichen
+        Entfernung von AI-Wasserzeichen und unsichtbaren Unicode-Zeichen
       </p>
       
       <div className="flex justify-center items-center">
@@ -35,7 +35,7 @@ export const AppHeader = ({ onInfoClick }: AppHeaderProps) => {
           className="text-cyan-400 hover:text-cyan-300 hover:bg-slate-800/50 border border-slate-700 backdrop-blur-sm transition-all duration-200"
         >
           <Info className="w-4 h-4 mr-2" />
-          Information
+          Informationen
         </Button>
       </div>
     </div>

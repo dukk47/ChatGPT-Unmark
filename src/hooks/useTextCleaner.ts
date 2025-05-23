@@ -5,19 +5,17 @@ import { UNICODE_CHARS } from '@/constants/unicodeChars';
 export const useTextCleaner = (inputText: string) => {
   return useMemo(() => {
     let cleaned = inputText;
-    const found: { char: string; count: number; name: string; code: string; positions: number[] }[] = [];
+    const found: { char: string; count: number; name: string; code: string }[] = [];
     
     Object.entries(UNICODE_CHARS).forEach(([char, info]) => {
       const regex = new RegExp(char, 'g');
-      const matches = [...inputText.matchAll(regex)];
-      if (matches.length > 0) {
-        const positions = matches.map(match => match.index!);
+      const matches = inputText.match(regex);
+      if (matches) {
         found.push({
           char,
           count: matches.length,
           name: info.name,
-          code: `U+${char.charCodeAt(0).toString(16).toUpperCase().padStart(4, '0')}`,
-          positions
+          code: `U+${char.charCodeAt(0).toString(16).toUpperCase().padStart(4, '0')}`
         });
         cleaned = cleaned.replace(regex, info.replaceWith);
       }

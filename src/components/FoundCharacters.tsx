@@ -4,7 +4,7 @@ import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 
 interface FoundCharactersProps {
-  foundChars: { char: string; count: number; name: string; code: string; positions: number[] }[];
+  foundChars: { char: string; count: number; name: string; code: string }[];
 }
 
 export const FoundCharacters = ({ foundChars }: FoundCharactersProps) => {
@@ -28,10 +28,6 @@ export const FoundCharacters = ({ foundChars }: FoundCharactersProps) => {
               <div>
                 <span className="font-mono text-sm font-semibold">{char.code}</span>
                 <p className="text-xs text-slate-600 dark:text-slate-400">{char.name}</p>
-                <p className="text-xs text-slate-500 dark:text-slate-500">
-                  Positionen: {char.positions.slice(0, 5).join(', ')}
-                  {char.positions.length > 5 && ` und ${char.positions.length - 5} weitere`}
-                </p>
               </div>
               <Badge variant="outline">{char.count}×</Badge>
             </div>

@@ -4,7 +4,7 @@ import { AlertCircle } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 
 interface AIWatermarkAlertProps {
-  watermarkChars: { char: string; count: number; name: string; code: string; positions: number[] }[];
+  watermarkChars: { char: string; count: number; name: string; code: string }[];
 }
 
 export const AIWatermarkAlert = ({ watermarkChars }: AIWatermarkAlertProps) => {

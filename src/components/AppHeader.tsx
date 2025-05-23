@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Shield, Info, Zap, BookOpen } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -18,14 +19,7 @@ export const AppHeader = ({ onInfoClick }: AppHeaderProps) => {
         <h1 className="text-6xl font-bold bg-gradient-to-r from-slate-200 via-cyan-300 to-slate-100 bg-clip-text text-transparent mb-4 relative">
           <div className="flex items-center justify-center gap-4">
             <div className="relative">
-              <img 
-                src="https://domains.diesdas.koeln/vec.svg" 
-                alt="Logo" 
-                className="w-14 h-14 drop-shadow-lg"
-                style={{
-                  filter: 'brightness(0) saturate(100%) invert(69%) sepia(85%) saturate(2063%) hue-rotate(167deg) brightness(103%) contrast(101%)'
-                }}
-              />
+              <Shield className="w-14 h-14 text-cyan-400 drop-shadow-lg" />
               <Zap className="w-4 h-4 text-blue-400 absolute -top-1 -right-1" />
             </div>
             {t('appTitle')}

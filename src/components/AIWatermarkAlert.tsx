@@ -1,17 +1,21 @@
 
 import React from 'react';
-import { AlertTriangle, Zap } from 'lucide-react';
+import { AlertTriangle, Zap, MousePointer } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 
 interface AIWatermarkAlertProps {
   watermarkChars: { char: string; count: number; name: string; code: string }[];
+  onShowInText?: () => void;
 }
 
-export const AIWatermarkAlert = ({ watermarkChars }: AIWatermarkAlertProps) => {
+export const AIWatermarkAlert = ({ watermarkChars, onShowInText }: AIWatermarkAlertProps) => {
   if (watermarkChars.length === 0) return null;
 
   return (
-    <div className="mb-8 p-6 bg-gradient-to-r from-red-950/30 via-orange-950/20 to-red-950/30 border border-red-800/30 rounded-xl backdrop-blur-sm shadow-2xl animate-scale-in">
+    <div 
+      className="mb-8 p-6 bg-gradient-to-r from-red-950/30 via-orange-950/20 to-red-950/30 border border-red-800/30 rounded-xl backdrop-blur-sm shadow-2xl animate-scale-in cursor-pointer hover:from-red-950/40 hover:via-orange-950/30 hover:to-red-950/40 transition-all duration-200"
+      onClick={onShowInText}
+    >
       <div className="flex items-center gap-3 mb-4">
         <div className="relative">
           <AlertTriangle className="w-6 h-6 text-red-400" />
@@ -20,9 +24,11 @@ export const AIWatermarkAlert = ({ watermarkChars }: AIWatermarkAlertProps) => {
         <span className="font-bold text-lg text-red-300">
           AI-Wasserzeichen erkannt
         </span>
+        <MousePointer className="w-4 h-4 text-red-400/60 ml-auto" />
       </div>
       <p className="text-red-300/80 mb-4 text-base">
-        Ihr Text enthält spezifische Zeichen, die als AI-Wasserzeichen verwendet werden.
+        Ihr Text enthält spezifische Zeichen, die als AI-Wasserzeichen verwendet werden. 
+        <span className="font-medium"> Klicken Sie hier, um sie im Text zu sehen.</span>
       </p>
       <div className="flex gap-3 flex-wrap">
         {watermarkChars.map((char, index) => (

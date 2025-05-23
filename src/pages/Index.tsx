@@ -1,10 +1,10 @@
 
-import React, { useState, useCallback, useMemo } from 'react';
+import React, { useState, useCallback, useMemo, useRef } from 'react';
 import { toast } from 'sonner';
 import { useTextCleaner } from '@/hooks/useTextCleaner';
 import { AppHeader } from '@/components/AppHeader';
 import { AIWatermarkAlert } from '@/components/AIWatermarkAlert';
-import { TextInputOutput } from '@/components/TextInputOutput';
+import { TextInputOutput, TextInputOutputRef } from '@/components/TextInputOutput';
 import { ActionButtons } from '@/components/ActionButtons';
 import { FoundCharacters } from '@/components/FoundCharacters';
 import { InfoDialog } from '@/components/InfoDialog';
@@ -13,6 +13,9 @@ const Index = () => {
   const [inputText, setInputText] = useState('');
   const [copiedRecently, setCopiedRecently] = useState(false);
   const [showInfoDialog, setShowInfoDialog] = useState(false);
+  const [highlightWatermarks, setHighlightWatermarks] = useState(false);
+  
+  const textInputRef = useRef<TextInputOutputRef>(null);
 
   const { cleanedText, foundChars, stats } = useTextCleaner(inputText);
 
@@ -22,6 +25,14 @@ const Index = () => {
       ['\u200B', '\u200C', '\u200D', '\u202F'].includes(char.char)
     );
   }, [foundChars]);
+
+  const handleShowWatermarksInText = useCallback(() => {
+    setHighlightWatermarks(true);
+    setTimeout(() => {
+      textInputRef.current?.scrollToWatermarks();
+    }, 100);
+    toast.success('AI-Wasserzeichen im Text hervorgehoben');
+  }, []);
 
   const copyToClipboard = useCallback(async () => {
     try {
@@ -49,6 +60,7 @@ const Index = () => {
 
   const clearAll = useCallback(() => {
     setInputText('');
+    setHighlightWatermarks(false);
     toast.success('Text gelöscht');
   }, []);
 
@@ -68,15 +80,21 @@ const Index = () => {
           onInfoClick={() => setShowInfoDialog(true)} 
         />
 
-        <AIWatermarkAlert watermarkChars={watermarkChars} />
+        <AIWatermarkAlert 
+          watermarkChars={watermarkChars} 
+          onShowInText={handleShowWatermarksInText}
+        />
 
         <div className="space-y-8">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             <div className="lg:col-span-2">
               <TextInputOutput 
+                ref={textInputRef}
                 inputText={inputText}
                 onInputChange={setInputText}
                 stats={stats}
+                highlightWatermarks={highlightWatermarks}
+                watermarkChars={watermarkChars}
               />
             </div>
             <div className="lg:col-span-1">

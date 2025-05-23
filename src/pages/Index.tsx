@@ -27,7 +27,7 @@ const Index = () => {
     try {
       await navigator.clipboard.writeText(cleanedText);
       setCopiedRecently(true);
-      toast.success('Bereinigter Text wurde in die Zwischenablage kopiert!');
+      toast.success('Bereinigter Text wurde in die Zwischenablage kopiert! ✨');
       setTimeout(() => setCopiedRecently(false), 2000);
     } catch (err) {
       toast.error('Fehler beim Kopieren in die Zwischenablage');
@@ -44,17 +44,24 @@ const Index = () => {
     a.click();
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
-    toast.success('Bereinigter Text wurde heruntergeladen!');
+    toast.success('Bereinigter Text wurde heruntergeladen! 🎉');
   }, [cleanedText]);
 
   const clearAll = useCallback(() => {
     setInputText('');
-    toast.success('Text wurde gelöscht');
+    toast.success('Text wurde gelöscht ✨');
   }, []);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-slate-900 dark:to-slate-800">
-      <div className="container mx-auto px-4 py-8 max-w-4xl">
+    <div className="min-h-screen bg-gradient-to-br from-violet-50 via-purple-50 to-indigo-100 dark:from-slate-900 dark:via-purple-900/20 dark:to-slate-800 relative overflow-hidden">
+      {/* Animated background elements */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute -top-4 -left-4 w-72 h-72 bg-gradient-to-r from-pink-300/20 to-violet-300/20 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute -bottom-8 -right-8 w-96 h-96 bg-gradient-to-r from-blue-300/20 to-cyan-300/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-gradient-to-r from-indigo-300/10 to-purple-300/10 rounded-full blur-3xl animate-pulse delay-500"></div>
+      </div>
+
+      <div className="container mx-auto px-4 py-8 max-w-6xl relative z-10">
         <AppHeader 
           stats={stats} 
           onInfoClick={() => setShowInfoDialog(true)} 
@@ -62,22 +69,24 @@ const Index = () => {
 
         <AIWatermarkAlert watermarkChars={watermarkChars} />
 
-        <TextInputOutput 
-          inputText={inputText}
-          cleanedText={cleanedText}
-          onInputChange={setInputText}
-        />
+        <div className="space-y-8">
+          <TextInputOutput 
+            inputText={inputText}
+            cleanedText={cleanedText}
+            onInputChange={setInputText}
+          />
 
-        <ActionButtons 
-          cleanedText={cleanedText}
-          inputText={inputText}
-          copiedRecently={copiedRecently}
-          onCopy={copyToClipboard}
-          onDownload={downloadCleanedText}
-          onClear={clearAll}
-        />
+          <ActionButtons 
+            cleanedText={cleanedText}
+            inputText={inputText}
+            copiedRecently={copiedRecently}
+            onCopy={copyToClipboard}
+            onDownload={downloadCleanedText}
+            onClear={clearAll}
+          />
 
-        <FoundCharacters foundChars={foundChars} />
+          <FoundCharacters foundChars={foundChars} />
+        </div>
 
         <InfoDialog 
           open={showInfoDialog} 

@@ -3,8 +3,11 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 const Impressum = () => {
+  const { t } = useLanguage();
+  
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-950 via-gray-900 to-slate-900 relative overflow-hidden">
       {/* Background elements */}
@@ -23,19 +26,19 @@ const Impressum = () => {
               className="text-cyan-400 hover:text-cyan-300 hover:bg-slate-800/50 border border-slate-700 backdrop-blur-sm transition-all duration-200"
             >
               <ArrowLeft className="w-4 h-4 mr-2" />
-              Zurück
+              {t('backButton')}
             </Button>
           </Link>
         </div>
 
         <div className="bg-slate-900/50 border-slate-700 backdrop-blur-sm shadow-2xl rounded-lg p-8">
           <h1 className="text-4xl font-bold bg-gradient-to-r from-slate-200 via-cyan-300 to-slate-100 bg-clip-text text-transparent mb-8">
-            Impressum
+            {t('impressumTitle')}
           </h1>
 
           <div className="space-y-6 text-slate-300">
             <div>
-              <h2 className="text-xl font-semibold text-slate-200 mb-3">Angaben gemäß § 5 TMG</h2>
+              <h2 className="text-xl font-semibold text-slate-200 mb-3">{t('tmgInfo')}</h2>
               <div className="space-y-1">
                 <p className="text-lg">Jonas Stempel</p>
                 <p>Türnicherstraße 3</p>
@@ -44,32 +47,27 @@ const Impressum = () => {
             </div>
 
             <div>
-              <h2 className="text-xl font-semibold text-slate-200 mb-3">Kontakt</h2>
+              <h2 className="text-xl font-semibold text-slate-200 mb-3">{t('contactTitle')}</h2>
               <div className="space-y-1">
-                <p>Betreiber: Jonas Stempel</p>
-                <p>Adresse: Türnicherstraße 3, 50959 Köln</p>
+                <p>{t('operator')}</p>
+                <p>{t('address')}</p>
               </div>
             </div>
 
             <div>
-              <h2 className="text-xl font-semibold text-slate-200 mb-3">Haftungsausschluss</h2>
+              <h2 className="text-xl font-semibold text-slate-200 mb-3">{t('disclaimerTitle')}</h2>
               <div className="space-y-4 text-sm">
                 <div>
-                  <h3 className="font-medium text-slate-300 mb-2">Haftung für Inhalte</h3>
+                  <h3 className="font-medium text-slate-300 mb-2">{t('liabilityContent')}</h3>
                   <p>
-                    Als Diensteanbieter sind wir gemäß § 7 Abs.1 TMG für eigene Inhalte auf diesen Seiten nach den 
-                    allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 TMG sind wir als Diensteanbieter jedoch nicht 
-                    unter der Verpflichtung, übermittelte oder gespeicherte fremde Informationen zu überwachen oder nach 
-                    Umständen zu forschen, die auf eine rechtswidrige Tätigkeit hinweisen.
+                    {t('liabilityContentText')}
                   </p>
                 </div>
 
                 <div>
-                  <h3 className="font-medium text-slate-300 mb-2">Haftung für Links</h3>
+                  <h3 className="font-medium text-slate-300 mb-2">{t('liabilityLinks')}</h3>
                   <p>
-                    Unser Angebot enthält Links zu externen Websites Dritter, auf deren Inhalte wir keinen Einfluss haben. 
-                    Deshalb können wir für diese fremden Inhalte auch keine Gewähr übernehmen. Für die Inhalte der verlinkten 
-                    Seiten ist stets der jeweilige Anbieter oder Betreiber der Seiten verantwortlich.
+                    {t('liabilityLinksText')}
                   </p>
                 </div>
               </div>

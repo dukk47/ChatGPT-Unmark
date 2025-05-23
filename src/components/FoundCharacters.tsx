@@ -3,6 +3,7 @@ import React from 'react';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { MousePointer } from 'lucide-react';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 interface FoundCharactersProps {
   foundChars: { char: string; count: number; name: string; code: string }[];
@@ -21,6 +22,8 @@ const SAFE_CHARS = [
 ];
 
 export const FoundCharacters = ({ foundChars, onCharacterClick }: FoundCharactersProps) => {
+  const { t } = useLanguage();
+  
   if (foundChars.length === 0) return null;
 
   const safeChars = foundChars.filter(char => SAFE_CHARS.includes(char.char));
@@ -31,17 +34,17 @@ export const FoundCharacters = ({ foundChars, onCharacterClick }: FoundCharacter
       <CardHeader>
         <CardTitle className="text-xl font-bold flex items-center justify-between text-slate-200">
           <span className="flex items-center gap-2">
-            Gefundene unsichtbare Zeichen
+            {t('foundInvisibleChars')}
           </span>
           <div className="flex gap-2">
             {safeChars.length > 0 && (
               <Badge variant="secondary" className="bg-green-900/40 text-green-200 border-green-700 px-3 py-1 font-medium backdrop-blur-sm">
-                {safeChars.length} OK
+                {safeChars.length} {t('ok')}
               </Badge>
             )}
             {problematicChars.length > 0 && (
               <Badge variant="secondary" className="bg-orange-900/40 text-orange-200 border-orange-700 px-3 py-1 font-medium backdrop-blur-sm">
-                {problematicChars.length} Problematisch
+                {problematicChars.length} {t('problematic')}
               </Badge>
             )}
           </div>

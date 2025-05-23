@@ -1,3 +1,4 @@
+
 import React, { useState, useCallback, useMemo, useRef } from 'react';
 import { toast } from 'sonner';
 import { Link } from 'react-router-dom';
@@ -100,8 +101,12 @@ const Index = () => {
         />
 
         <div className="space-y-8">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            <div className="lg:col-span-2">
+          <div className={`grid gap-8 transition-all duration-500 ease-in-out ${
+            foundChars.length > 0 ? 'grid-cols-1 lg:grid-cols-3' : 'grid-cols-1'
+          }`}>
+            <div className={`transition-all duration-500 ease-in-out ${
+              foundChars.length > 0 ? 'lg:col-span-2' : 'col-span-1'
+            }`}>
               <TextInputOutput 
                 ref={textInputRef}
                 inputText={inputText}
@@ -112,12 +117,14 @@ const Index = () => {
                 highlightedChar={highlightedChar}
               />
             </div>
-            <div className="lg:col-span-1">
-              <FoundCharacters 
-                foundChars={foundChars} 
-                onCharacterClick={handleCharacterClick}
-              />
-            </div>
+            {foundChars.length > 0 && (
+              <div className="lg:col-span-1 transition-all duration-500 ease-in-out animate-fade-in">
+                <FoundCharacters 
+                  foundChars={foundChars} 
+                  onCharacterClick={handleCharacterClick}
+                />
+              </div>
+            )}
           </div>
 
           <ActionButtons 

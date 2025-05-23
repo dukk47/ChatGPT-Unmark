@@ -1,4 +1,3 @@
-
 import React, { useState, useCallback, useMemo, useRef } from 'react';
 import { toast } from 'sonner';
 import { Link } from 'react-router-dom';
@@ -101,24 +100,25 @@ const Index = () => {
         />
 
         <div className="space-y-8">
-          {/* Text Input - Full Width */}
-          <TextInputOutput 
-            ref={textInputRef}
-            inputText={inputText}
-            onInputChange={setInputText}
-            stats={stats}
-            highlightWatermarks={highlightWatermarks}
-            watermarkChars={watermarkChars}
-            highlightedChar={highlightedChar}
-          />
-
-          {/* Found Characters - Below Input, only when characters are found */}
-          {foundChars.length > 0 && (
-            <FoundCharacters 
-              foundChars={foundChars} 
-              onCharacterClick={handleCharacterClick}
-            />
-          )}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <div className="lg:col-span-2">
+              <TextInputOutput 
+                ref={textInputRef}
+                inputText={inputText}
+                onInputChange={setInputText}
+                stats={stats}
+                highlightWatermarks={highlightWatermarks}
+                watermarkChars={watermarkChars}
+                highlightedChar={highlightedChar}
+              />
+            </div>
+            <div className="lg:col-span-1">
+              <FoundCharacters 
+                foundChars={foundChars} 
+                onCharacterClick={handleCharacterClick}
+              />
+            </div>
+          </div>
 
           <ActionButtons 
             cleanedText={cleanedText}

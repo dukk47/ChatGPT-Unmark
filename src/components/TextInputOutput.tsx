@@ -46,6 +46,7 @@ export const TextInputOutput = ({ inputText, onInputChange, stats }: TextInputOu
             placeholder="Text hier einfügen..."
             value={inputText}
             onChange={(e) => onInputChange(e.target.value)}
+            spellCheck={false}
             className="min-h-[400px] resize-none border-0 bg-slate-800/30 text-slate-200 placeholder:text-slate-500 focus:ring-0 focus:border-0 shadow-none text-base leading-relaxed p-6 backdrop-blur-sm"
           />
         </CardContent>

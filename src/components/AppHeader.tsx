@@ -1,13 +1,18 @@
+
 import React from 'react';
 import { Shield, Info, Zap } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
+import { useLanguage } from '@/contexts/LanguageContext';
+import { LanguageSwitcher } from '@/components/LanguageSwitcher';
 
 interface AppHeaderProps {
   onInfoClick: () => void;
 }
 
 export const AppHeader = ({ onInfoClick }: AppHeaderProps) => {
+  const { t } = useLanguage();
+
   return (
     <div className="text-center mb-12 animate-fade-in">
       <div className="relative inline-block mb-8">
@@ -17,17 +22,19 @@ export const AppHeader = ({ onInfoClick }: AppHeaderProps) => {
               <Shield className="w-14 h-14 text-cyan-400 drop-shadow-lg" />
               <Zap className="w-4 h-4 text-blue-400 absolute -top-1 -right-1" />
             </div>
-            ChatGPT Unmark
+            {t('header.title')}
           </div>
         </h1>
         <div className="absolute -inset-2 bg-gradient-to-r from-cyan-500/10 to-blue-500/10 blur-xl rounded-full"></div>
       </div>
       
       <p className="text-xl text-slate-300 mb-8 font-light max-w-2xl mx-auto leading-relaxed">
-        Entfernung von AI-Wasserzeichen und unsichtbaren Unicode-Zeichen
+        {t('header.subtitle')}
       </p>
       
-      <div className="flex justify-center items-center gap-4">
+      <div className="flex justify-center items-center gap-4 flex-wrap">
+        <LanguageSwitcher />
+        
         <Button 
           variant="ghost" 
           size="sm"
@@ -35,7 +42,7 @@ export const AppHeader = ({ onInfoClick }: AppHeaderProps) => {
           className="text-cyan-400 hover:text-cyan-300 hover:bg-slate-800/50 border border-slate-700 backdrop-blur-sm transition-all duration-200"
         >
           <Info className="w-4 h-4 mr-2" />
-          Informationen
+          {t('header.info')}
         </Button>
         
         <Link to="/impressum">
@@ -44,7 +51,7 @@ export const AppHeader = ({ onInfoClick }: AppHeaderProps) => {
             size="sm"
             className="text-slate-400 hover:text-slate-300 hover:bg-slate-800/50 border border-slate-700 backdrop-blur-sm transition-all duration-200"
           >
-            Impressum
+            {t('header.impressum')}
           </Button>
         </Link>
       </div>

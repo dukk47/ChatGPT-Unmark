@@ -1,6 +1,8 @@
+
 import React, { useState, useCallback, useMemo, useRef } from 'react';
 import { toast } from 'sonner';
 import { useTextCleaner } from '@/hooks/useTextCleaner';
+import { useLanguage } from '@/contexts/LanguageContext';
 import { AppHeader } from '@/components/AppHeader';
 import { AIWatermarkAlert } from '@/components/AIWatermarkAlert';
 import { TextInputOutput, TextInputOutputRef } from '@/components/TextInputOutput';
@@ -9,6 +11,7 @@ import { FoundCharacters } from '@/components/FoundCharacters';
 import { InfoDialog } from '@/components/InfoDialog';
 
 const Index = () => {
+  const { t } = useLanguage();
   const [inputText, setInputText] = useState('');
   const [copiedRecently, setCopiedRecently] = useState(false);
   const [showInfoDialog, setShowInfoDialog] = useState(false);
@@ -32,8 +35,8 @@ const Index = () => {
     setTimeout(() => {
       textInputRef.current?.scrollToWatermarks();
     }, 100);
-    toast.success('AI-Wasserzeichen im Text hervorgehoben');
-  }, []);
+    toast.success(t('toast.watermarksHighlighted'));
+  }, [t]);
 
   const handleCharacterClick = useCallback((char: string) => {
     setHighlightedChar(char);
@@ -41,19 +44,19 @@ const Index = () => {
     setTimeout(() => {
       textInputRef.current?.scrollToCharacter(char);
     }, 100);
-    toast.success('Zeichen im Text hervorgehoben');
-  }, []);
+    toast.success(t('toast.characterHighlighted'));
+  }, [t]);
 
   const copyToClipboard = useCallback(async () => {
     try {
       await navigator.clipboard.writeText(cleanedText);
       setCopiedRecently(true);
-      toast.success('Bereinigter Text erfolgreich kopiert');
+      toast.success(t('toast.copied'));
       setTimeout(() => setCopiedRecently(false), 2000);
     } catch (err) {
-      toast.error('Fehler beim Kopieren');
+      toast.error(t('toast.copyError'));
     }
-  }, [cleanedText]);
+  }, [cleanedText, t]);
 
   const downloadCleanedText = useCallback(() => {
     const blob = new Blob([cleanedText], { type: 'text/plain' });
@@ -65,15 +68,15 @@ const Index = () => {
     a.click();
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
-    toast.success('Download gestartet');
-  }, [cleanedText]);
+    toast.success(t('toast.downloadStarted'));
+  }, [cleanedText, t]);
 
   const clearAll = useCallback(() => {
     setInputText('');
     setHighlightWatermarks(false);
     setHighlightedChar('');
-    toast.success('Text gelöscht');
-  }, []);
+    toast.success(t('toast.textCleared'));
+  }, [t]);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-950 via-gray-900 to-slate-900 relative overflow-hidden">

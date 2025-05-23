@@ -2,7 +2,6 @@
 import React from 'react';
 import { AlertTriangle, Zap, MousePointer } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
-import { useLanguage } from '@/contexts/LanguageContext';
 
 interface AIWatermarkAlertProps {
   watermarkChars: { char: string; count: number; name: string; code: string }[];
@@ -10,8 +9,6 @@ interface AIWatermarkAlertProps {
 }
 
 export const AIWatermarkAlert = ({ watermarkChars, onShowInText }: AIWatermarkAlertProps) => {
-  const { t } = useLanguage();
-  
   if (watermarkChars.length === 0) return null;
 
   return (
@@ -25,13 +22,13 @@ export const AIWatermarkAlert = ({ watermarkChars, onShowInText }: AIWatermarkAl
           <Zap className="w-3 h-3 text-yellow-400 absolute -top-1 -right-1" />
         </div>
         <span className="font-bold text-lg text-red-300">
-          {t('alert.detected')}
+          AI-Wasserzeichen erkannt
         </span>
         <MousePointer className="w-4 h-4 text-red-400/60 ml-auto" />
       </div>
       <p className="text-red-300/80 mb-4 text-base">
-        {t('alert.description')}
-        <span className="font-medium"> {t('alert.clickHint')}</span>
+        Ihr Text enthält spezifische Zeichen, die als AI-Wasserzeichen verwendet werden. 
+        <span className="font-medium"> Klicken Sie hier, um sie im Text zu sehen.</span>
       </p>
       <div className="flex gap-3 flex-wrap">
         {watermarkChars.map((char, index) => (

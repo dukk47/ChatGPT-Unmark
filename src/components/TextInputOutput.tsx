@@ -1,8 +1,8 @@
+
 import React, { useRef, useImperativeHandle, forwardRef } from 'react';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card';
 import { Textarea } from '@/components/ui/textarea';
 import { Badge } from '@/components/ui/badge';
-import { useLanguage } from '@/contexts/LanguageContext';
 
 interface TextInputOutputProps {
   inputText: string;
@@ -25,7 +25,6 @@ export interface TextInputOutputRef {
 
 export const TextInputOutput = forwardRef<TextInputOutputRef, TextInputOutputProps>(
   ({ inputText, onInputChange, stats, highlightWatermarks = false, watermarkChars = [], highlightedChar }, ref) => {
-    const { t } = useLanguage();
     const textareaRef = useRef<HTMLTextAreaElement>(null);
 
     useImperativeHandle(ref, () => ({
@@ -62,7 +61,7 @@ export const TextInputOutput = forwardRef<TextInputOutputRef, TextInputOutputPro
         return (
           <Textarea
             ref={textareaRef}
-            placeholder={t('input.placeholder')}
+            placeholder="Text hier einfügen..."
             value={inputText}
             onChange={(e) => onInputChange(e.target.value)}
             spellCheck={false}
@@ -90,7 +89,7 @@ export const TextInputOutput = forwardRef<TextInputOutputRef, TextInputOutputPro
         <div className="relative">
           <Textarea
             ref={textareaRef}
-            placeholder={t('input.placeholder')}
+            placeholder="Text hier einfügen..."
             value={inputText}
             onChange={(e) => onInputChange(e.target.value)}
             spellCheck={false}
@@ -111,19 +110,19 @@ export const TextInputOutput = forwardRef<TextInputOutputRef, TextInputOutputPro
             <div className="flex justify-between items-start">
               <div>
                 <CardTitle className="text-xl font-bold text-slate-200 flex items-center gap-2">
-                  {t('input.title')}
+                  Text eingeben
                 </CardTitle>
                 <CardDescription className="text-slate-400">
-                  {t('input.description')}
+                  Fügen Sie hier Ihren Text ein, um ihn von unsichtbaren Zeichen zu bereinigen
                 </CardDescription>
               </div>
               <div className="flex gap-2 flex-wrap">
                 <Badge variant="secondary" className="bg-slate-800/50 text-slate-300 border-slate-700 px-3 py-1 font-medium backdrop-blur-sm">
-                  {stats.originalLength} {t('input.characters')}
+                  {stats.originalLength} Zeichen
                 </Badge>
                 {stats.charactersRemoved > 0 && (
                   <Badge variant="destructive" className="bg-red-900/30 text-red-300 border-red-700 px-3 py-1 font-medium backdrop-blur-sm">
-                    {stats.charactersRemoved} {t('input.removed')}
+                    {stats.charactersRemoved} entfernt
                   </Badge>
                 )}
               </div>

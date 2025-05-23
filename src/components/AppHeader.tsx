@@ -1,7 +1,7 @@
-
 import React from 'react';
 import { Shield, Info, Zap } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { Link } from 'react-router-dom';
 
 interface AppHeaderProps {
   onInfoClick: () => void;
@@ -27,7 +27,7 @@ export const AppHeader = ({ onInfoClick }: AppHeaderProps) => {
         Entfernung von AI-Wasserzeichen und unsichtbaren Unicode-Zeichen
       </p>
       
-      <div className="flex justify-center items-center">
+      <div className="flex justify-center items-center gap-4">
         <Button 
           variant="ghost" 
           size="sm"
@@ -37,6 +37,16 @@ export const AppHeader = ({ onInfoClick }: AppHeaderProps) => {
           <Info className="w-4 h-4 mr-2" />
           Informationen
         </Button>
+        
+        <Link to="/impressum">
+          <Button 
+            variant="ghost" 
+            size="sm"
+            className="text-slate-400 hover:text-slate-300 hover:bg-slate-800/50 border border-slate-700 backdrop-blur-sm transition-all duration-200"
+          >
+            Impressum
+          </Button>
+        </Link>
       </div>
     </div>
   );

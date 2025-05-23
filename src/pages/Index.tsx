@@ -1,4 +1,3 @@
-
 import React, { useState, useCallback, useMemo } from 'react';
 import { toast } from 'sonner';
 import { useTextCleaner } from '@/hooks/useTextCleaner';
@@ -66,7 +65,6 @@ const Index = () => {
 
       <div className="container mx-auto px-4 py-8 max-w-4xl relative z-10">
         <AppHeader 
-          stats={stats} 
           onInfoClick={() => setShowInfoDialog(true)} 
         />
 
@@ -76,6 +74,7 @@ const Index = () => {
           <TextInputOutput 
             inputText={inputText}
             onInputChange={setInputText}
+            stats={stats}
           />
 
           <ActionButtons 

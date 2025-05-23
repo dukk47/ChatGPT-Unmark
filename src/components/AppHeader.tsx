@@ -2,17 +2,12 @@
 import React from 'react';
 import { Shield, Info, Zap } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
 
 interface AppHeaderProps {
-  stats: {
-    originalLength: number;
-    charactersRemoved: number;
-  };
   onInfoClick: () => void;
 }
 
-export const AppHeader = ({ stats, onInfoClick }: AppHeaderProps) => {
+export const AppHeader = ({ onInfoClick }: AppHeaderProps) => {
   return (
     <div className="text-center mb-12 animate-fade-in">
       <div className="relative inline-block mb-8">
@@ -32,17 +27,7 @@ export const AppHeader = ({ stats, onInfoClick }: AppHeaderProps) => {
         Professionelle Entfernung von AI-Wasserzeichen und unsichtbaren Unicode-Zeichen
       </p>
       
-      <div className="flex justify-center items-center gap-6 text-sm">
-        <div className="flex items-center gap-4">
-          <Badge variant="secondary" className="bg-slate-800/50 text-slate-300 border-slate-700 px-4 py-2 font-medium backdrop-blur-sm">
-            {stats.originalLength} Zeichen
-          </Badge>
-          {stats.charactersRemoved > 0 && (
-            <Badge variant="destructive" className="bg-red-900/30 text-red-300 border-red-700 px-4 py-2 font-medium backdrop-blur-sm">
-              {stats.charactersRemoved} entfernt
-            </Badge>
-          )}
-        </div>
+      <div className="flex justify-center items-center">
         <Button 
           variant="ghost" 
           size="sm"

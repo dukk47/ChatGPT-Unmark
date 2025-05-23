@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Shield, Info, Zap } from 'lucide-react';
+import { Shield, Info, Zap, BookOpen } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 import { useLanguage } from '@/contexts/LanguageContext';
@@ -42,6 +42,17 @@ export const AppHeader = ({ onInfoClick }: AppHeaderProps) => {
           <Info className="w-4 h-4 mr-2" />
           {t('information')}
         </Button>
+        
+        <Link to="/about">
+          <Button 
+            variant="ghost" 
+            size="sm"
+            className="text-green-400 hover:text-green-300 hover:bg-slate-800/50 border border-slate-700 backdrop-blur-sm transition-all duration-200"
+          >
+            <BookOpen className="w-4 h-4 mr-2" />
+            {t('about')}
+          </Button>
+        </Link>
         
         <Link to="/impressum">
           <Button 

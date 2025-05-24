@@ -58,8 +58,8 @@ export const CookieBanner = () => {
   return (
     <>
       {/* Cookie Banner */}
-      <div className="fixed bottom-0 left-0 right-0 z-50 p-4 bg-slate-900/95 backdrop-blur-md border-t border-slate-700">
-        <Card className="bg-slate-800/90 border-slate-600 max-w-4xl mx-auto">
+      <div className="fixed bottom-4 left-4 right-4 z-50">
+        <Card className="bg-slate-800/95 backdrop-blur-md border-slate-600 max-w-4xl mx-auto shadow-2xl">
           <CardHeader className="pb-4">
             <CardTitle className="flex items-center gap-2 text-slate-200">
               <Cookie className="w-5 h-5 text-cyan-400" />

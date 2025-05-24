@@ -1,4 +1,3 @@
-
 import React, { useState, useCallback, useMemo, useRef } from 'react';
 import { toast } from 'sonner';
 import { Link } from 'react-router-dom';
@@ -143,55 +142,57 @@ const Index = () => {
           onOpenChange={setShowInfoDialog} 
         />
 
-        {/* Enhanced Footer with smooth animations */}
+        {/* Refined Footer - less blinking, more professional */}
         <footer className="mt-20 pt-12 relative">
-          {/* Gradient divider */}
-          <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-slate-600/50 to-transparent"></div>
+          {/* Subtle gradient divider */}
+          <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-slate-600/40 to-transparent"></div>
           
-          {/* Subtle glow effect */}
-          <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-64 h-32 bg-gradient-to-b from-cyan-500/5 to-transparent blur-2xl pointer-events-none"></div>
+          {/* Gentle ambient glow */}
+          <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-96 h-24 bg-gradient-to-b from-cyan-500/3 to-transparent blur-3xl pointer-events-none"></div>
           
           <div className="text-center space-y-8 relative">
-            {/* AI Notice with enhanced styling */}
+            {/* AI Notice with refined styling */}
             <div className="group relative">
-              <div className="absolute -inset-1 bg-gradient-to-r from-cyan-500/20 via-blue-500/20 to-purple-500/20 rounded-lg blur opacity-25 group-hover:opacity-40 transition duration-1000 group-hover:duration-300 animate-pulse"></div>
-              <div className="relative bg-slate-900/80 backdrop-blur-sm border border-slate-700/50 rounded-lg p-6 hover:border-slate-600/50 transition-all duration-300">
+              <div className="absolute -inset-1 bg-gradient-to-r from-cyan-500/10 via-blue-500/10 to-purple-500/10 rounded-lg blur-sm opacity-40 group-hover:opacity-60 transition-opacity duration-500"></div>
+              <div className="relative bg-slate-900/60 backdrop-blur border border-slate-700/40 rounded-lg p-6 hover:border-slate-600/60 hover:bg-slate-900/70 transition-all duration-500">
                 <p className="text-sm text-slate-300 leading-relaxed max-w-3xl mx-auto">
-                  <span className="text-cyan-400 animate-pulse">✨</span> {t('aiGeneratedNotice')}
+                  <span className="text-cyan-400 mr-2">✨</span>
+                  {t('aiGeneratedNotice')}
                 </p>
               </div>
             </div>
             
-            {/* Promotional section with call-to-action styling */}
+            {/* Professional promotional section */}
             <div className="space-y-6">
-              <div className="group cursor-default">
-                <p className="text-sm text-slate-400 leading-relaxed max-w-2xl mx-auto group-hover:text-slate-300 transition-colors duration-300">
+              <div className="group">
+                <p className="text-sm text-slate-400 leading-relaxed max-w-2xl mx-auto group-hover:text-slate-300 transition-colors duration-500">
                   {t('promotionalText')}
                 </p>
               </div>
               
+              {/* Call-to-action button with subtle effects */}
               <div className="relative inline-block group">
-                <div className="absolute -inset-2 bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 rounded-full blur opacity-30 group-hover:opacity-60 transition duration-300 animate-pulse"></div>
+                <div className="absolute -inset-1 bg-gradient-to-r from-cyan-500/20 via-blue-500/20 to-purple-500/20 rounded-full blur opacity-0 group-hover:opacity-50 transition-opacity duration-500"></div>
                 <a 
                   href="https://diesdas.koeln" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="relative inline-flex items-center gap-2 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white font-medium px-8 py-3 rounded-full transition-all duration-300 transform hover:scale-105 hover:shadow-xl hover:shadow-cyan-500/25"
+                  className="relative inline-flex items-center gap-3 bg-gradient-to-r from-cyan-600 to-blue-700 hover:from-cyan-500 hover:to-blue-600 text-white font-medium px-8 py-3 rounded-full transition-all duration-300 transform hover:scale-[1.02] hover:shadow-lg hover:shadow-cyan-500/20"
                 >
                   <span className="text-sm">{t('contactMe')}</span>
-                  <span className="text-lg transform transition-transform duration-300 group-hover:translate-x-1">→</span>
+                  <span className="text-base transform transition-transform duration-300 group-hover:translate-x-0.5">→</span>
                 </a>
               </div>
             </div>
             
-            {/* Impressum link with subtle styling */}
+            {/* Clean impressum link */}
             <div className="pt-8 border-t border-slate-800/30">
               <Link 
                 to="/impressum" 
-                className="inline-block text-xs text-slate-500 hover:text-slate-300 transition-all duration-300 relative group"
+                className="inline-block text-xs text-slate-500 hover:text-slate-300 transition-colors duration-300 relative group"
               >
                 <span className="relative z-10">{t('impressum')}</span>
-                <div className="absolute -bottom-1 left-0 w-0 h-px bg-gradient-to-r from-cyan-400 to-blue-500 group-hover:w-full transition-all duration-300"></div>
+                <div className="absolute -bottom-0.5 left-0 w-0 h-px bg-gradient-to-r from-cyan-400 to-blue-500 group-hover:w-full transition-all duration-300"></div>
               </Link>
             </div>
           </div>

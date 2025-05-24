@@ -1,4 +1,3 @@
-
 import React, { useState, useCallback, useMemo, useRef } from 'react';
 import { toast } from 'sonner';
 import { Link } from 'react-router-dom';
@@ -145,7 +144,10 @@ const Index = () => {
 
         {/* Footer with Impressum link */}
         <footer className="mt-16 pt-8 border-t border-slate-800/50">
-          <div className="text-center">
+          <div className="text-center space-y-2">
+            <p className="text-xs text-slate-500 leading-relaxed max-w-2xl mx-auto">
+              {t('aiGeneratedNotice')}
+            </p>
             <Link 
               to="/impressum" 
               className="text-xs text-slate-500 hover:text-slate-400 transition-colors duration-200 underline"

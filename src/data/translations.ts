@@ -322,5 +322,11 @@ export const translations: Translations = {
   english: {
     de: 'Englisch',
     en: 'English',
+  },
+
+  // AI Generated Notice
+  aiGeneratedNotice: {
+    de: '✨ Diese Anwendung wurde zu 100% mit KI entwickelt - gepromptet von einem Anwendungsentwickler mit Herz für sauberen Code und benutzerfreundliche Lösungen.',
+    en: '✨ This application was 100% AI-generated - prompted by an application developer with a passion for clean code and user-friendly solutions.',
   }
 };

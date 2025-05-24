@@ -1,5 +1,5 @@
 
-import React, { useRef, useImperativeHandle, forwardRef } from 'react';
+import React, { useRef, useImperativeHandle, forwardRef, useState, useEffect } from 'react';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card';
 import { Textarea } from '@/components/ui/textarea';
 import { Badge } from '@/components/ui/badge';
@@ -28,6 +28,29 @@ export const TextInputOutput = forwardRef<TextInputOutputRef, TextInputOutputPro
   ({ inputText, onInputChange, stats, highlightWatermarks = false, watermarkChars = [], highlightedChar }, ref) => {
     const { t } = useLanguage();
     const textareaRef = useRef<HTMLTextAreaElement>(null);
+    const overlayRef = useRef<HTMLDivElement>(null);
+    const [scrollTop, setScrollTop] = useState(0);
+    const [scrollLeft, setScrollLeft] = useState(0);
+
+    // Sync overlay scroll with textarea scroll
+    useEffect(() => {
+      const textarea = textareaRef.current;
+      const overlay = overlayRef.current;
+      
+      if (!textarea || !overlay) return;
+
+      const handleScroll = () => {
+        const newScrollTop = textarea.scrollTop;
+        const newScrollLeft = textarea.scrollLeft;
+        setScrollTop(newScrollTop);
+        setScrollLeft(newScrollLeft);
+        overlay.scrollTop = newScrollTop;
+        overlay.scrollLeft = newScrollLeft;
+      };
+
+      textarea.addEventListener('scroll', handleScroll);
+      return () => textarea.removeEventListener('scroll', handleScroll);
+    }, []);
 
     useImperativeHandle(ref, () => ({
       scrollToWatermarks: () => {
@@ -98,7 +121,11 @@ export const TextInputOutput = forwardRef<TextInputOutputRef, TextInputOutputPro
             className="min-h-[400px] resize-none border-0 bg-slate-800/30 text-slate-200 placeholder:text-slate-500 focus:ring-0 focus:border-0 shadow-none text-base leading-relaxed p-6 backdrop-blur-sm relative z-10"
           />
           <div 
-            className="absolute inset-0 p-6 text-base leading-relaxed pointer-events-none whitespace-pre-wrap break-words overflow-hidden text-transparent"
+            ref={overlayRef}
+            className="absolute inset-0 p-6 text-base leading-relaxed pointer-events-none whitespace-pre-wrap break-words overflow-hidden text-transparent min-h-[400px]"
+            style={{
+              scrollBehavior: 'auto',
+            }}
             dangerouslySetInnerHTML={{ __html: highlightedText }}
           />
         </div>

@@ -1,4 +1,3 @@
-
 import React, { useRef, useImperativeHandle, forwardRef, useState, useEffect } from 'react';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card';
 import { Textarea } from '@/components/ui/textarea';
@@ -29,8 +28,6 @@ export const TextInputOutput = forwardRef<TextInputOutputRef, TextInputOutputPro
     const { t } = useLanguage();
     const textareaRef = useRef<HTMLTextAreaElement>(null);
     const overlayRef = useRef<HTMLDivElement>(null);
-    const [scrollTop, setScrollTop] = useState(0);
-    const [scrollLeft, setScrollLeft] = useState(0);
 
     // Sync overlay scroll with textarea scroll
     useEffect(() => {
@@ -40,12 +37,8 @@ export const TextInputOutput = forwardRef<TextInputOutputRef, TextInputOutputPro
       if (!textarea || !overlay) return;
 
       const handleScroll = () => {
-        const newScrollTop = textarea.scrollTop;
-        const newScrollLeft = textarea.scrollLeft;
-        setScrollTop(newScrollTop);
-        setScrollLeft(newScrollLeft);
-        overlay.scrollTop = newScrollTop;
-        overlay.scrollLeft = newScrollLeft;
+        overlay.scrollTop = textarea.scrollTop;
+        overlay.scrollLeft = textarea.scrollLeft;
       };
 
       textarea.addEventListener('scroll', handleScroll);
@@ -118,13 +111,15 @@ export const TextInputOutput = forwardRef<TextInputOutputRef, TextInputOutputPro
             value={inputText}
             onChange={(e) => onInputChange(e.target.value)}
             spellCheck={false}
-            className="min-h-[400px] resize-none border-0 bg-slate-800/30 text-slate-200 placeholder:text-slate-500 focus:ring-0 focus:border-0 shadow-none text-base leading-relaxed p-6 backdrop-blur-sm relative z-10"
+            className="min-h-[400px] resize-none border-0 bg-transparent text-transparent placeholder:text-slate-500 focus:ring-0 focus:border-0 shadow-none text-base leading-relaxed p-6 backdrop-blur-sm relative z-10 caret-slate-200"
+            style={{ background: 'transparent' }}
           />
           <div 
             ref={overlayRef}
-            className="absolute inset-0 p-6 text-base leading-relaxed pointer-events-none whitespace-pre-wrap break-words overflow-hidden text-transparent min-h-[400px]"
+            className="absolute inset-0 p-6 text-base leading-relaxed pointer-events-none whitespace-pre-wrap break-words overflow-hidden text-slate-200 min-h-[400px] bg-slate-800/30 backdrop-blur-sm"
             style={{
               scrollBehavior: 'auto',
+              overflow: 'hidden',
             }}
             dangerouslySetInnerHTML={{ __html: highlightedText }}
           />

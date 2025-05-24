@@ -1,3 +1,4 @@
+
 import React, { useState, useCallback, useMemo, useRef } from 'react';
 import { toast } from 'sonner';
 import { Link } from 'react-router-dom';
@@ -142,34 +143,57 @@ const Index = () => {
           onOpenChange={setShowInfoDialog} 
         />
 
-        {/* Footer with Impressum link */}
-        <footer className="mt-16 pt-8 border-t border-slate-800/50">
-          <div className="text-center space-y-4">
-            <p className="text-xs text-slate-500 leading-relaxed max-w-2xl mx-auto">
-              {t('aiGeneratedNotice')}
-            </p>
-            
-            {/* Promotional section */}
-            <div className="space-y-2">
-              <p className="text-xs text-slate-400 leading-relaxed max-w-2xl mx-auto">
-                {t('promotionalText')}
-              </p>
-              <a 
-                href="https://diesdas.koeln" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="inline-block text-xs text-cyan-400 hover:text-cyan-300 transition-colors duration-200 underline font-medium"
-              >
-                {t('contactMe')} →
-              </a>
+        {/* Enhanced Footer with smooth animations */}
+        <footer className="mt-20 pt-12 relative">
+          {/* Gradient divider */}
+          <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-slate-600/50 to-transparent"></div>
+          
+          {/* Subtle glow effect */}
+          <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-64 h-32 bg-gradient-to-b from-cyan-500/5 to-transparent blur-2xl pointer-events-none"></div>
+          
+          <div className="text-center space-y-8 relative">
+            {/* AI Notice with enhanced styling */}
+            <div className="group relative">
+              <div className="absolute -inset-1 bg-gradient-to-r from-cyan-500/20 via-blue-500/20 to-purple-500/20 rounded-lg blur opacity-25 group-hover:opacity-40 transition duration-1000 group-hover:duration-300 animate-pulse"></div>
+              <div className="relative bg-slate-900/80 backdrop-blur-sm border border-slate-700/50 rounded-lg p-6 hover:border-slate-600/50 transition-all duration-300">
+                <p className="text-sm text-slate-300 leading-relaxed max-w-3xl mx-auto">
+                  <span className="text-cyan-400 animate-pulse">✨</span> {t('aiGeneratedNotice')}
+                </p>
+              </div>
             </div>
             
-            <Link 
-              to="/impressum" 
-              className="text-xs text-slate-500 hover:text-slate-400 transition-colors duration-200 underline"
-            >
-              {t('impressum')}
-            </Link>
+            {/* Promotional section with call-to-action styling */}
+            <div className="space-y-6">
+              <div className="group cursor-default">
+                <p className="text-sm text-slate-400 leading-relaxed max-w-2xl mx-auto group-hover:text-slate-300 transition-colors duration-300">
+                  {t('promotionalText')}
+                </p>
+              </div>
+              
+              <div className="relative inline-block group">
+                <div className="absolute -inset-2 bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 rounded-full blur opacity-30 group-hover:opacity-60 transition duration-300 animate-pulse"></div>
+                <a 
+                  href="https://diesdas.koeln" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="relative inline-flex items-center gap-2 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white font-medium px-8 py-3 rounded-full transition-all duration-300 transform hover:scale-105 hover:shadow-xl hover:shadow-cyan-500/25"
+                >
+                  <span className="text-sm">{t('contactMe')}</span>
+                  <span className="text-lg transform transition-transform duration-300 group-hover:translate-x-1">→</span>
+                </a>
+              </div>
+            </div>
+            
+            {/* Impressum link with subtle styling */}
+            <div className="pt-8 border-t border-slate-800/30">
+              <Link 
+                to="/impressum" 
+                className="inline-block text-xs text-slate-500 hover:text-slate-300 transition-all duration-300 relative group"
+              >
+                <span className="relative z-10">{t('impressum')}</span>
+                <div className="absolute -bottom-1 left-0 w-0 h-px bg-gradient-to-r from-cyan-400 to-blue-500 group-hover:w-full transition-all duration-300"></div>
+              </Link>
+            </div>
           </div>
         </footer>
       </div>

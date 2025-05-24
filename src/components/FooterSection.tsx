@@ -21,7 +21,7 @@ export const FooterSection = () => {
           <div className="relative bg-slate-900/60 backdrop-blur border border-slate-700/40 rounded-lg p-6 hover:border-slate-600/60 hover:bg-slate-900/70 transition-all duration-500">
             <p className="text-sm text-slate-300 leading-relaxed max-w-3xl mx-auto">
               <span className="text-cyan-400 mr-2">✨</span>
-              Diese Anwendung wurde zu <span className="font-bold text-cyan-300">100% mit KI entwickelt</span> - gepromptet <span className="font-bold text-cyan-300">von einem Anwendungsentwickler</span> mit Herz für <span className="font-bold text-cyan-300">sauberen Code</span> und <span className="font-bold text-cyan-300">benutzerfreundliche Lösungen</span>.
+              Diese Anwendung wurde zu <span className="font-bold text-cyan-300">100% mit KI entwickelt</span> - gepromptet <span className="font-bold text-cyan-300">von einem Anwendungsentwickler</span> mit ❤️ für <span className="font-bold text-cyan-300">sauberen Code</span> und <span className="font-bold text-cyan-300">benutzerfreundliche Lösungen</span>.
             </p>
           </div>
         </div>

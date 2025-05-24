@@ -1,3 +1,4 @@
+
 import React, { useState, useCallback, useMemo, useRef } from 'react';
 import { toast } from 'sonner';
 import { Link } from 'react-router-dom';
@@ -8,6 +9,7 @@ import { TextInputOutput, TextInputOutputRef } from '@/components/TextInputOutpu
 import { ActionButtons } from '@/components/ActionButtons';
 import { FoundCharacters } from '@/components/FoundCharacters';
 import { InfoDialog } from '@/components/InfoDialog';
+import { CookieBanner } from '@/components/CookieBanner';
 import { useLanguage } from '@/contexts/LanguageContext';
 
 const Index = () => {
@@ -153,6 +155,9 @@ const Index = () => {
           </div>
         </footer>
       </div>
+
+      {/* Cookie Banner */}
+      <CookieBanner />
     </div>
   );
 };

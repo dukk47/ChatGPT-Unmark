@@ -144,10 +144,26 @@ const Index = () => {
 
         {/* Footer with Impressum link */}
         <footer className="mt-16 pt-8 border-t border-slate-800/50">
-          <div className="text-center space-y-2">
+          <div className="text-center space-y-4">
             <p className="text-xs text-slate-500 leading-relaxed max-w-2xl mx-auto">
               {t('aiGeneratedNotice')}
             </p>
+            
+            {/* Promotional section */}
+            <div className="space-y-2">
+              <p className="text-xs text-slate-400 leading-relaxed max-w-2xl mx-auto">
+                {t('promotionalText')}
+              </p>
+              <a 
+                href="https://diesdas.koeln" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="inline-block text-xs text-cyan-400 hover:text-cyan-300 transition-colors duration-200 underline font-medium"
+              >
+                {t('contactMe')} →
+              </a>
+            </div>
+            
             <Link 
               to="/impressum" 
               className="text-xs text-slate-500 hover:text-slate-400 transition-colors duration-200 underline"

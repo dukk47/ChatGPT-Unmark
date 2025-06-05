@@ -1,5 +1,5 @@
 
-import React, { createContext, useState, useContext, ReactNode } from 'react';
+import React, { createContext, useState, useContext, ReactNode, useEffect } from 'react';
 import { Language, LanguageContextType } from '@/types/language';
 import { translations } from '@/data/translations';
 
@@ -10,9 +10,41 @@ const LanguageContext = createContext<LanguageContextType>({
   t: () => '',
 });
 
+// Function to detect user's preferred language
+const detectUserLanguage = (): Language => {
+  // Check if language preference is already saved in localStorage
+  const savedLanguage = localStorage.getItem('preferred-language') as Language;
+  if (savedLanguage && (savedLanguage === 'de' || savedLanguage === 'en')) {
+    return savedLanguage;
+  }
+
+  // Get browser language
+  const browserLanguage = navigator.language || navigator.languages[0];
+  
+  // If browser language starts with 'de' (German), use German
+  if (browserLanguage.toLowerCase().startsWith('de')) {
+    return 'de';
+  }
+  
+  // For all other languages, default to English
+  return 'en';
+};
+
 // Create the provider component
 export const LanguageProvider: React.FC<{children: ReactNode}> = ({ children }) => {
-  const [language, setLanguage] = useState<Language>('de'); // Default to German
+  const [language, setLanguageState] = useState<Language>('de');
+
+  // Initialize language on component mount
+  useEffect(() => {
+    const detectedLanguage = detectUserLanguage();
+    setLanguageState(detectedLanguage);
+  }, []);
+
+  // Wrapper function to also save to localStorage
+  const setLanguage = (newLanguage: Language) => {
+    setLanguageState(newLanguage);
+    localStorage.setItem('preferred-language', newLanguage);
+  };
 
   // Translation function
   const t = (key: string): string => {

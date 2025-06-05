@@ -34,7 +34,7 @@ export const FooterSection = () => {
             </p>
           </div>
           
-          {/* Call-to-action button with subtle effects */}
+          {/* Contact button hidden - commenting out the entire section
           <div className="relative inline-block group">
             <div className="absolute -inset-1 bg-gradient-to-r from-cyan-500/20 via-blue-500/20 to-purple-500/20 rounded-full blur opacity-0 group-hover:opacity-50 transition-opacity duration-500"></div>
             <a 
@@ -47,6 +47,7 @@ export const FooterSection = () => {
               <span className="text-base transform transition-transform duration-300 group-hover:translate-x-0.5">→</span>
             </a>
           </div>
+          */}
         </div>
         
         {/* Clean impressum link */}

@@ -26,29 +26,15 @@ export const FooterSection = () => {
           </div>
         </div>
         
-        {/* Professional promotional section */}
+        {/* Professional promotional section - commented out
         <div className="space-y-6">
           <div className="group">
             <p className="text-sm text-slate-400 leading-relaxed max-w-2xl mx-auto group-hover:text-slate-300 transition-colors duration-500">
               {t('promotionalText')}
             </p>
           </div>
-          
-          {/* Contact button hidden - commenting out the entire section
-          <div className="relative inline-block group">
-            <div className="absolute -inset-1 bg-gradient-to-r from-cyan-500/20 via-blue-500/20 to-purple-500/20 rounded-full blur opacity-0 group-hover:opacity-50 transition-opacity duration-500"></div>
-            <a 
-              href="https://diesdas.koeln" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="relative inline-flex items-center gap-3 bg-gradient-to-r from-cyan-600 to-blue-700 hover:from-cyan-500 hover:to-blue-600 text-white font-medium px-8 py-3 rounded-full transition-all duration-300 transform hover:scale-[1.02] hover:shadow-lg hover:shadow-cyan-500/20"
-            >
-              <span className="text-sm">{t('contactMe')}</span>
-              <span className="text-base transform transition-transform duration-300 group-hover:translate-x-0.5">→</span>
-            </a>
-          </div>
-          */}
         </div>
+        */}
         
         {/* Clean impressum link */}
         <div className="pt-8 border-t border-slate-800/30">

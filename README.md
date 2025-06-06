@@ -6,11 +6,11 @@
 ![ChatGPT Watermark Remover Preview](image.png)
 
 [![Built with Lovable](https://img.shields.io/badge/Built%20with-Lovable-ff69b4?style=for-the-badge&logo=data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTEyIDJMMTMuMDkgOC4yNkwyMCAxMEwxMy4wOSAxNS43NEwxMiAyMkwxMC45MSAxNS43NEw0IDEwTDEwLjkxIDguMjZMMTIgMloiIGZpbGw9IndoaXRlIi8+Cjwvc3ZnPgo=)](https://lovable.dev)
-[![Live Demo](https://img.shields.io/badge/🌐_Live_Demo-Try_Now-brightgreen?style=for-the-badge)](https://lovable.dev/projects/576094fd-dc83-413e-af3c-2206bc22fd60)
+[![Live Demo](https://img.shields.io/badge/🌐_Live_Demo-Try_Now-brightgreen?style=for-the-badge)](https://unicode-whisper-cleaner.lovable.app/)
 
 **Remove AI watermarks and bypass AI detection from ChatGPT, GPT-4, and other AI-generated text**
 
-[🚀 Try Live Demo](https://lovable.dev/projects/576094fd-dc83-413e-af3c-2206bc22fd60)
+[🚀 Try Live Demo](https://unicode-whisper-cleaner.lovable.app/)
 
 </div>
 
@@ -58,11 +58,11 @@ A web-based tool to **remove AI watermarks** and **bypass AI detection** from AI
 
 ### 🌐 Online (Recommended)
 Use directly in your browser - no installation required:
-👉 **[ChatGPT Watermark Remover](https://lovable.dev/projects/576094fd-dc83-413e-af3c-2206bc22fd60)**
+👉 **[ChatGPT Watermark Remover](https://unicode-whisper-cleaner.lovable.app/)**
 
 ### 🔧 Local Development
 ```bash
-git clone https://github.com/dukk47/unicode-whisper-cleaner.git
+git clone [YOUR_GITHUB_REPO_URL]
 cd unicode-whisper-cleaner
 npm install
 npm run dev
@@ -97,9 +97,9 @@ MIT License - see [LICENSE](LICENSE) for details.
 
 ## 🆘 Support
 
-- 📖 [Documentation](https://github.com/dukk47/unicode-whisper-cleaner/wiki)
-- 🐛 [Bug Reports](https://github.com/dukk47/unicode-whisper-cleaner/issues)
-- 💬 [Discussions](https://github.com/dukk47/unicode-whisper-cleaner/discussions)
+- 📖 [Documentation](https://github.com/[YOUR_USERNAME]/unicode-whisper-cleaner/wiki)
+- 🐛 [Bug Reports](https://github.com/[YOUR_USERNAME]/unicode-whisper-cleaner/issues)
+- 💬 [Discussions](https://github.com/[YOUR_USERNAME]/unicode-whisper-cleaner/discussions)
 
 ---
 

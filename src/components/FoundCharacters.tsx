@@ -37,13 +37,13 @@ export const FoundCharacters = ({ foundChars, onCharacterClick }: FoundCharacter
           <CardTitle className="text-xl font-bold flex items-center justify-center text-slate-200">
             <div className="flex items-center gap-3">
               <CheckCircle className="w-6 h-6 text-green-400" />
-              <span className="text-green-300">Alles in Ordnung</span>
+              <span className="text-green-300">{t('allGood')}</span>
             </div>
           </CardTitle>
         </CardHeader>
         <CardContent className="p-6 text-center">
           <p className="text-slate-400 text-sm">
-            Nur normale Zeichen gefunden - keine problematischen Zeichen erkannt.
+            {t('onlyNormalCharacters')}
           </p>
         </CardContent>
       </Card>

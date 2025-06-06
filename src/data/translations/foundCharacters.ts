@@ -13,4 +13,12 @@ export const foundCharactersTranslations = {
     de: 'Problematisch',
     en: 'Problematic',
   },
+  allGood: {
+    de: 'Alles in Ordnung',
+    en: 'All Good',
+  },
+  onlyNormalCharacters: {
+    de: 'Nur normale Zeichen gefunden - keine problematischen Zeichen erkannt.',
+    en: 'Only normal characters found - no problematic characters detected.',
+  },
 };

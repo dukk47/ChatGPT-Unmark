@@ -2,7 +2,7 @@
 
 <div align="center">
 
-![ChatGPT Watermark Remover Preview](/lovable-uploads/5e04c205-b93a-467d-9c44-3d7436c9f293.png)
+![ChatGPT Watermark Remover Preview](image.png)
 
 [![Built with Lovable](https://img.shields.io/badge/Built%20with-Lovable-ff69b4?style=for-the-badge&logo=data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTEyIDJMMTMuMDkgOC4yNkwyMCAxMEwxMy4wOSAxNS43NEwxMiAyMkwxMC45MSAxNS43NEw0IDEwTDEwLjkxIDguMjZMMTIgMloiIGZpbGw9IndoaXRlIi8+Cjwvc3ZnPgo=)](https://lovable.dev)
 [![Live Demo](https://img.shields.io/badge/🌐_Live_Demo-Try_Now-brightgreen?style=for-the-badge)](https://lovable.dev/projects/576094fd-dc83-413e-af3c-2206bc22fd60)
@@ -78,7 +78,7 @@
 
 ## 🎬 How It Works - AI Watermark Removal Demo
 
-![ChatGPT Watermark Removal Demo](/lovable-uploads/5e04c205-b93a-467d-9c44-3d7436c9f293.png)
+![ChatGPT Watermark Removal Demo](image.png)
 
 1. **Paste AI-generated text** with hidden watermarks
 2. **Automatic detection** highlights invisible tracking characters

@@ -62,8 +62,8 @@ Use directly in your browser - no installation required:
 
 ### 🔧 Local Development
 ```bash
-git clone [YOUR_GITHUB_REPO_URL]
-cd unicode-whisper-cleaner
+git clone https://github.com/dukk47/ChatGPT-Unmask.git
+cd ChatGPT-Unmask
 npm install
 npm run dev
 ```
@@ -85,7 +85,7 @@ npm run dev
 
 ## ⭐ Star History
 
-[![Star History Chart](https://api.star-history.com/svg?repos=[YOUR_USERNAME]/unicode-whisper-cleaner&type=Date)](https://star-history.com/#[YOUR_USERNAME]/unicode-whisper-cleaner&Date)
+[![Star History Chart](https://api.star-history.com/svg?repos=dukk47/ChatGPT-Unmask&type=Date)](https://star-history.com/#dukk47/ChatGPT-Unmask&Date)
 
 ## 📄 License
 
@@ -101,9 +101,9 @@ MIT License - see [LICENSE](LICENSE) for details.
 
 ## 🆘 Support
 
-- 📖 [Documentation](https://github.com/[YOUR_USERNAME]/unicode-whisper-cleaner/wiki)
-- 🐛 [Bug Reports](https://github.com/[YOUR_USERNAME]/unicode-whisper-cleaner/issues)
-- 💬 [Discussions](https://github.com/[YOUR_USERNAME]/unicode-whisper-cleaner/discussions)
+- 📖 [Documentation](https://github.com/dukk47/ChatGPT-Unmask/wiki)
+- 🐛 [Bug Reports](https://github.com/dukk47/ChatGPT-Unmask/issues)
+- 💬 [Discussions](https://github.com/dukk47/ChatGPT-Unmask/discussions)
 
 ---
 

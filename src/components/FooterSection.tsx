@@ -1,6 +1,5 @@
 
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { useLanguage } from '@/contexts/LanguageContext';
 
 export const FooterSection = () => {
@@ -36,15 +35,17 @@ export const FooterSection = () => {
         </div>
         */}
         
-        {/* Clean impressum link */}
+        {/* GitHub link */}
         <div className="pt-8 border-t border-slate-800/30">
-          <Link 
-            to="/impressum" 
+          <a 
+            href="https://github.com/dukk47" 
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-block text-xs text-slate-500 hover:text-slate-300 transition-colors duration-300 relative group"
           >
-            <span className="relative z-10">{t('impressum')}</span>
+            <span className="relative z-10">GitHub</span>
             <div className="absolute -bottom-0.5 left-0 w-0 h-px bg-gradient-to-r from-cyan-400 to-blue-500 group-hover:w-full transition-all duration-300"></div>
-          </Link>
+          </a>
         </div>
       </div>
     </footer>

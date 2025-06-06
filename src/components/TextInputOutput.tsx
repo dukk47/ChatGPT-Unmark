@@ -1,3 +1,4 @@
+
 import React, { useRef, useImperativeHandle, forwardRef, useState, useEffect } from 'react';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card';
 import { Textarea } from '@/components/ui/textarea';
@@ -83,7 +84,7 @@ export const TextInputOutput = forwardRef<TextInputOutputRef, TextInputOutputPro
             value={inputText}
             onChange={(e) => onInputChange(e.target.value)}
             spellCheck={false}
-            className="min-h-[400px] resize-none border-0 bg-slate-800/30 text-slate-200 placeholder:text-slate-500 focus:ring-0 focus:border-0 shadow-none text-base leading-relaxed p-6 backdrop-blur-sm"
+            className="min-h-[400px] resize-none border-0 bg-slate-800/30 text-slate-200 placeholder:text-slate-500 focus-visible:ring-1 focus-visible:ring-slate-600/50 focus-visible:ring-offset-0 shadow-none text-base leading-relaxed p-6 backdrop-blur-sm"
           />
         );
       }
@@ -111,7 +112,7 @@ export const TextInputOutput = forwardRef<TextInputOutputRef, TextInputOutputPro
             value={inputText}
             onChange={(e) => onInputChange(e.target.value)}
             spellCheck={false}
-            className="min-h-[400px] resize-none border-0 bg-transparent text-transparent placeholder:text-slate-500 focus:ring-0 focus:border-0 shadow-none text-base leading-relaxed p-6 backdrop-blur-sm relative z-10 caret-slate-200"
+            className="min-h-[400px] resize-none border-0 bg-transparent text-transparent placeholder:text-slate-500 focus-visible:ring-1 focus-visible:ring-slate-600/50 focus-visible:ring-offset-0 shadow-none text-base leading-relaxed p-6 backdrop-blur-sm relative z-10 caret-slate-200"
             style={{ background: 'transparent' }}
           />
           <div 

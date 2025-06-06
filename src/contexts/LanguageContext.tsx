@@ -1,4 +1,3 @@
-
 import React, { createContext, useState, useContext, ReactNode, useEffect } from 'react';
 import { Language, LanguageContextType } from '@/types/language';
 import { translations } from '@/data/translations';
@@ -22,11 +21,12 @@ const detectUserLanguage = (): Language => {
   const browserLanguage = navigator.language || navigator.languages[0];
   
   // If browser language starts with 'de' (German), use German
+  // Otherwise, default to English for all other countries/languages
   if (browserLanguage.toLowerCase().startsWith('de')) {
     return 'de';
   }
   
-  // For all other languages, default to English
+  // For all non-German languages/locations, default to English
   return 'en';
 };
 

@@ -83,6 +83,10 @@ npm run dev
 - **Open source** - Transparent code
 - **No registration** - Instant use
 
+## ⭐ Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=[YOUR_USERNAME]/unicode-whisper-cleaner&type=Date)](https://star-history.com/#[YOUR_USERNAME]/unicode-whisper-cleaner&Date)
+
 ## 📄 License
 
 MIT License - see [LICENSE](LICENSE) for details.

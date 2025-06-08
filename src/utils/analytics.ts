@@ -1,20 +1,35 @@
 
 // Google Analytics utility functions
-export const GA_TRACKING_ID = 'G-XXXXXXXXXX'; // Replace with your actual GA4 tracking ID
+export const GA_TRACKING_ID = 'G-CG3R66WMQM';
+
+// Declare gtag for TypeScript
+declare global {
+  interface Window {
+    gtag: {
+      (...args: any[]): void;
+      q?: any[];
+    };
+    dataLayer: any[];
+  }
+}
 
 // Initialize Google Analytics
 export const initGA = (trackingId: string) => {
   if (typeof window !== 'undefined' && trackingId && trackingId !== 'G-XXXXXXXXXX') {
+    // Initialize dataLayer
+    window.dataLayer = window.dataLayer || [];
+    
     // Load Google Analytics script
     const script = document.createElement('script');
     script.async = true;
     script.src = `https://www.googletagmanager.com/gtag/js?id=${trackingId}`;
     document.head.appendChild(script);
 
-    // Initialize gtag
-    window.gtag = window.gtag || function() {
-      (window.gtag.q = window.gtag.q || []).push(arguments);
+    // Initialize gtag function
+    window.gtag = function() {
+      window.dataLayer.push(arguments);
     };
+    
     window.gtag('js', new Date());
     window.gtag('config', trackingId);
   }
@@ -39,10 +54,3 @@ export const trackEvent = (action: string, category: string, label?: string, val
     });
   }
 };
-
-// Declare gtag for TypeScript
-declare global {
-  interface Window {
-    gtag: (...args: any[]) => void;
-  }
-}

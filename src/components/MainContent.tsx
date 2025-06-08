@@ -9,6 +9,7 @@ import { ActionButtons } from '@/components/ActionButtons';
 import { FoundCharacters } from '@/components/FoundCharacters';
 import { InfoDialog } from '@/components/InfoDialog';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { trackEvent } from '@/utils/analytics';
 
 export const MainContent = () => {
   const { t } = useLanguage();
@@ -36,6 +37,7 @@ export const MainContent = () => {
       textInputRef.current?.scrollToWatermarks();
     }, 100);
     toast.success(t('watermarksHighlighted'));
+    trackEvent('highlight_watermarks', 'user_interaction');
   }, [t]);
 
   const handleCharacterClick = useCallback((char: string) => {
@@ -45,6 +47,7 @@ export const MainContent = () => {
       textInputRef.current?.scrollToCharacter(char);
     }, 100);
     toast.success(t('charactersHighlighted'));
+    trackEvent('highlight_character', 'user_interaction', char);
   }, [t]);
 
   const copyToClipboard = useCallback(async () => {
@@ -53,8 +56,10 @@ export const MainContent = () => {
       setCopiedRecently(true);
       toast.success(t('textCopied'));
       setTimeout(() => setCopiedRecently(false), 2000);
+      trackEvent('copy_text', 'user_action', undefined, cleanedText.length);
     } catch (err) {
       toast.error(t('copyError'));
+      trackEvent('copy_error', 'error');
     }
   }, [cleanedText, t]);
 
@@ -69,6 +74,7 @@ export const MainContent = () => {
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
     toast.success(t('downloadStarted'));
+    trackEvent('download_text', 'user_action', undefined, cleanedText.length);
   }, [cleanedText, t]);
 
   const clearAll = useCallback(() => {
@@ -76,12 +82,23 @@ export const MainContent = () => {
     setHighlightWatermarks(false);
     setHighlightedChar('');
     toast.success(t('textCleared'));
+    trackEvent('clear_text', 'user_action');
   }, [t]);
+
+  // Track when watermarks are detected
+  React.useEffect(() => {
+    if (watermarkChars.length > 0) {
+      trackEvent('watermarks_detected', 'detection', undefined, watermarkChars.length);
+    }
+  }, [watermarkChars.length]);
 
   return (
     <>
       <AppHeader 
-        onInfoClick={() => setShowInfoDialog(true)} 
+        onInfoClick={() => {
+          setShowInfoDialog(true);
+          trackEvent('open_info_dialog', 'user_interaction');
+        }} 
       />
 
       <AIWatermarkAlert 

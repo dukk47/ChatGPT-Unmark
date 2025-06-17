@@ -20,9 +20,7 @@ A web-based tool to **remove AI watermarks** and **bypass AI detection** from AI
 
 ### 🔥 Key Features
 
-- **Remove AI watermark** - Detect and remove invisible tracking characters
-- **Bypass AI detection** - Make AI text undetectable by AI detection tools  
-- **Humanize AI text** - Transform AI content to appear human-written
+- **Remove AI watermark** - Detect and remove invisible tracking characters  
 - **Real-time detection** - Visual highlighting of watermark characters
 - **Privacy-first** - 100% client-side processing, no data collection
 - **Multiple AI models** - Supports ChatGPT, GPT-4, Claude, Bard, and more
